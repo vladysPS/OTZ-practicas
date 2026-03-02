@@ -1,0 +1,49 @@
+<!-- pango-footer.liquid -->
+
+
+<footer class="p-{{ section.id }}">
+ <div class="page-width">
+  this is going to be a cool footer
+ </div> 
+</footer>
+
+
+
+
+{%  # CSS  %}
+<style>
+.p-{{ section.id }}{
+
+
+}
+
+
+@media(min-width:768px){
+ .p-{{ section.id }}{
+  
+ }
+}
+
+
+</style>
+
+
+{%  # JAVASCRIPT  %}
+<script>
+  
+</script>
+
+
+{% schema %}
+ {
+ "name": "pango footer",
+ "settings": [],
+ "presets": [
+   {
+     "name": "pango footer",
+     "category": "All Pango"
+   }
+ ]
+} 
+{% endschema %}
+

@@ -1,0 +1,135 @@
+<!-- pango-GSAP-test.liquid -->
+
+<section  style="height:600px; padding:50px;">
+    <div class="smooth-wrapper" style="position:relative;">
+        <div id="smooth-content" style="padding:0 50px; 0 30px">
+            <div class="boxes box-1">
+                <div class="box box-a">a</div>
+                <div class="box box-b">b</div>
+            </div>     
+            <h2 class="title" style="margin-bottom:100px;">Scroll Smoother</h2>
+            <div class="boxes box-2" style="margin-top:50px; padding:0 50px; 0 30px" >
+                <div class="box box-c">c</div>
+                <div class="box box-d">d</div>
+            </div>    
+        
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+{%  # CSS  %}
+<style>
+.title{
+}
+.boxes{
+    display:flex;
+    gap:50px;
+    justify-content:space-between;
+    .box{
+        width:100px;
+        height:135px;
+    }
+    .box-a{
+        background:red;
+    }
+    .box-b{
+        background:blue;
+    }
+    .box-c{
+        background:pink;
+    }
+    .box-d{
+        background:orange;   
+    }
+}
+
+
+@media(min-width:768px){
+ .p-{{ section.id }}{
+  
+ }
+}
+
+
+</style>
+
+
+{%  # JAVASCRIPT  %}
+<script>
+ gsap.registerPlugin(ScrollTrigger);
+
+gsap.from(".title",{
+    scrollTrigger:{
+        trigger:".smooth-wrapper",
+        start:"0px 80%",
+        markers:true,
+        toggleActions:"restart pause none none"
+    },
+    y:210,
+    duration:1.4
+});
+gsap.from(".box-a",{
+    scrollTrigger:{
+        trigger:".smooth-wrapper",
+        start:"0px 80%",
+        markers:true,
+        toggleActions:"restart pause none none"
+    },
+    y:210,
+    duration:1.4
+});
+
+gsap.from(".box-b",{
+    scrollTrigger:{
+        trigger:".smooth-wrapper",
+        start:"0px 80%",
+        markers:true,
+        toggleActions:"restart pause none none"
+    },
+    y:180,
+    duration:1.8
+});
+gsap.from(".box-c",{
+    scrollTrigger:{
+        trigger:".smooth-wrapper",
+        start:"0px 80%",
+        markers:true,
+        toggleActions:"restart pause none none"
+    },
+    y:165,
+    duration:2
+});
+
+gsap.from(".box-d",{
+    scrollTrigger:{
+        trigger:".smooth-wrapper",
+        start:"0px 80%",
+        markers:true,
+        toggleActions:"restart pause none none"
+    },
+    y:145,
+    duration:2.3
+}); 
+
+ 
+</script>
+
+
+{% schema %}
+ {
+ "name": "pango GSAP test",
+ "settings": [],
+ "presets": [
+   {
+     "name": "pango GSAP test",
+     "category": "All Pango"
+   }
+ ]
+} 
+{% endschema %}
+

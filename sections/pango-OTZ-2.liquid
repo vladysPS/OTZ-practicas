@@ -1,0 +1,354 @@
+<!-- pango-OTZ-scroll-2.liquid -->
+
+<section class="p-{{ section.id }}-parallax">
+  <div class="p-{{ section.id }}-smooth-wrapper" id="smooth-wrapper">
+   <div class="p-{{ section.id }}-smooth-content" id="smooth-content">
+    <div class="p-container-top">
+      {% comment %}<img class="p-vid-1" src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/vid-1-OTZ.png?v=1765279938">{% endcomment %}
+        <p>Url we have: {{ section.settings.video_top | file_url }}</p>
+        <p>Url we want: https://cdn.shopify.com/videos/c/o/v/bc9e1bbd4ccc4872ac4dc0d52c1dca1e.mp4</p>
+        <video src="https://cdn.shopify.com/videos/c/o/v/bc9e1bbd4ccc4872ac4dc0d52c1dca1e.mp4" class="p-vid-1" 
+          {% if section.settings.video_loop %}loop{% endif %} 
+          autoplay
+          muted="muted"
+          alt="product video">
+        </video>
+
+        {% comment %}{% render 'video',
+        video: section.settings.video_top,
+        video_class: 'p-vid-1',
+        video_loop: section.video_loop_top,
+        video_autoplay: section.settings.video_autoplay_top,
+        section_id: section.id %}{% endcomment %}
+        
+      <img class="p-img-1 "  src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/im-1-OTZ.png?v=1765279937">
+      {% comment %} {%- assign image_top = section.settings.image_top -%}
+      {{ image_top | image_url: width: image_top.width | image_tag: class: 'p-img-1 ', loading: 'lazy' }} {% endcomment %}
+    </div>
+    <div class="p-container-middle" data-lag="3">
+      <h4 class="p-small-text">Raíces</h4>
+      {% comment %} <h4 class=" p-small-text">{{ section.settings.product_name }}</h4> {% endcomment %}
+      <p class="p-description">A tribute to the body in motion</p>
+      {% comment %} <p class=" p-description">{{ section.settings.product_copy }}</p> {% endcomment %}
+    </div>
+    <div class="p-container-bottom">
+      <img class="p-img-2 " src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/im-2-OTZ.png?v=1765279939">
+      {% comment %}{%- assign image_bottom = section.settings.image_bottom -%}
+      {{ image_bottom | image_url: width: image_bottom.width | image_tag: class: 'p-img-2 ', loading: 'lazy' }}{% endcomment %}
+      {% comment %}<img class="p-vid-2 " src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/vid-2-OTZ.png?v=1765279938">{% endcomment %}
+        
+          {% render 'video',
+          video: section.settings.video_bottom,
+          video_class: 'p-vid-2',
+          video_loop: section.settings.video_loop_bottom,
+          video_autoplay: section.settings.video_autoplay_bottom,
+          section_id: section.id%} 
+        
+      
+    </div>
+   </div> 
+  </div>
+</section>
+
+
+
+
+{%  # CSS  %}
+<style>
+.p-{{ section.id }}-smooth-wrapper{
+  .p-container-top{
+    display:flex;
+    justify-content:space-between;
+    padding:0 0 0 18px; 
+    margin-bottom:30px;
+    .p-vid-1{
+      width: 144px;
+      height: 192px;
+    }
+    .p-img-1{
+      width: 161px;
+      height: 108px;
+      margin-top:114px;
+    }
+  }
+  .p-container-middle{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    h4{
+      font-size:24px;
+      text-align: center;
+      margin:0;
+      font-family: Alpina-Thin;
+      font-weight: 250;
+    }
+    p{
+      margin:0;
+      font-size: 80px;
+      text-align: center;
+      width:296px;
+      font-family: Alpina-Thin;
+      line-height:1.1;
+      font-weight: 250;
+    }
+  }
+  .p-container-bottom{
+    display:flex;
+    justify-content:space-between;
+    padding-top:10px;
+    .p-img-2{
+      width: 131px;
+      height: 197px;
+      margin-top:38px;
+    }
+    .p-vid-2{
+      width: 161px;
+      height: 155px;
+      margin-bottom:80px;
+    }
+    .p-vid-2::-webkit-media-controls {
+      display: none !important;
+    }
+  }
+}
+
+@media (min-width: 450px) and (max-width: 1440px) {
+  .p-{{ section.id }}-smooth-wrapper {
+    .p-container-top {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 calc(18px + (40 - 18) * ((100vw - 450px) / (1440 - 450))) 0 18px;
+      margin-bottom: calc(30px + (60 - 30) * ((100vw - 450px) / (1440 - 450)));
+
+      .p-vid-1 {
+        width: calc(144px + (324 - 144) * ((100vw - 450px) / (1440 - 450)));
+        height: calc(192px + (431 - 192) * ((100vw - 450px) / (1440 - 450)));
+      }
+      .p-img-1 {
+        width: calc(161px + (411 - 161) * ((100vw - 450px) / (1440 - 450)));
+        height: calc(108px + (272 - 108) * ((100vw - 450px) / (1440 - 450)));
+        margin-top: calc(114px + (61 - 114) * ((100vw - 450px) / (1440 - 450)));
+      }
+    }
+
+    .p-container-middle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      h4 {
+        font-size: calc(24px + (32 - 24) * ((100vw - 450px) / (1440 - 450)));
+      }
+
+      p {
+        font-size: calc(80px + (120 - 80) * ((100vw - 450px) / (1440 - 450)));
+        width: calc(296px + (670 - 296) * ((100vw - 450px) / (1440 - 450)));
+      }
+    }
+
+    .p-container-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: calc(10px + (103 - 10) * ((100vw - 450px) / (1440 - 450)));
+
+      .p-img-2 {
+        width: calc(131px + (325 - 131) * ((100vw - 450px) / (1440 - 450)));
+        height: calc(197px + (399 - 197) * ((100vw - 450px) / (1440 - 450)));
+        margin-top: calc(38px + (0 - 38) * ((100vw - 450px) / (1440 - 450)));
+      }
+
+      .p-vid-2 {
+        width: calc(161px + (369 - 161) * ((100vw - 450px) / (1440 - 450)));
+        height: calc(155px + (354 - 155) * ((100vw - 450px) / (1440 - 450)));
+        margin-bottom: calc(80px + (210 - 80) * ((100vw - 450px) / (1440 - 450)));
+      }
+    }
+  }
+}
+
+
+@media(min-width:1440px){
+ .p-{{ section.id }}-smooth-wrapper{
+    .p-container-top{
+        padding:0 213px 0 40px; 
+        margin-bottom:60px;
+        .p-vid-1{
+          width:324px;
+          height:431px;
+        }
+        .p-img-1{
+          width:411px;
+          height:272px;
+          margin-top:61px;
+        }
+      }
+    .p-container-middle{
+      h4{
+        font-size:32px;
+      }
+      p{
+        margin:0;
+        font-size: 120px;
+        width:670px;
+      }
+    }
+    .p-container-bottom{
+      padding-left:213px;
+      padding-top:103px;
+      .p-img-2{
+        padding-top:0;
+        width: 325px;
+        height: 399px;
+      }
+      .p-vid-2{
+        position: relative;
+        bottom: 210px;
+        width: 369px;
+        height: 354px;
+      }
+    }
+  }
+}
+
+
+
+</style>
+
+
+{%  # JAVASCRIPT  %}
+<script>
+console.log("here we have the video object: ", {{ section.settings.video_top | json }});
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.from(".p-vid-1",{
+    scrollTrigger:{
+        trigger:".p-{{ section.id }}-smooth-wrapper",
+        start:"0px 80%",
+        toggleActions:"play reverse play reverse"
+    },
+    y:2110,
+    duration:1.6
+});
+gsap.from(".p-small-text",{
+    scrollTrigger:{
+        trigger:".p-{{ section.id }}-smooth-wrapper",
+        start:"0px 80%",
+        toggleActions:"play reverse play reverse"
+    },
+    y:1710,
+    duration:2.2
+});
+gsap.from(".p-description",{
+    scrollTrigger:{
+        trigger:".p-{{ section.id }}-smooth-wrapper",
+        start:"0px 80%",
+        toggleActions:"play reverse play reverse"
+    },
+    y:2210,
+    duration:3
+});
+
+gsap.from(".p-img-1",{
+    scrollTrigger:{
+        trigger:".p-{{ section.id }}-smooth-wrapper",
+        start:"0px 80%",
+        toggleActions:"play reverse play reverse"
+    },
+    y:2180,
+    duration:1.2
+});
+gsap.from(".p-vid-2",{
+    scrollTrigger:{
+        trigger:".p-{{ section.id }}-smooth-wrapper",
+        start:"0px 80%",
+        toggleActions:"play reverse play reverse"
+    },
+    y:1765,
+    duration:3.4
+});
+
+gsap.from(".p-img-2",{
+    scrollTrigger:{
+        trigger:".p-{{ section.id }}-smooth-wrapper",
+        start:"0px 80%",
+        toggleActions:"play reverse play reverse"
+    },
+    y:1745,
+    duration:3.8
+}); 
+
+</script>
+
+
+{% schema %}
+ {
+ "name": "pango OTZ Scroll",
+ "settings": [
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Product name"
+    },
+    {
+      "type": "text",
+      "id": "product_copy",
+      "label": "Product copy"
+    },
+    {
+      "type": "video",
+      "id": "video_top",
+      "label": "Video top"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_loop_top",
+      "label": "Video loop top",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay_top",
+      "label": "Video autoplay top",
+      "info": "t:info.video_autoplay",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image_top",
+      "label": "Image top"
+    },
+    {
+      "type": "video",
+      "id": "video_bottom",
+      "label": "Video bottom"
+    },
+    {
+      "type": "checkbox",
+      "id": "video_loop_bottom",
+      "label": "Video loop bottom",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "video_autoplay_bottom",
+      "label": "Video autoplay bottom",
+      "info": "t:info.video_autoplay",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "image_bottom",
+      "label": "Image bottom"
+    }
+ ],
+ "presets": [
+   {
+     "name": "pango OTZ Scroll 2",
+     "category": "All Pango"
+   }
+ ]
+} 
+{% endschema %}
+

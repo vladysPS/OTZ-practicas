@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+{% if order.customer_order_url %}
+  {%- assign order_details_url = order.customer_order_url -%}
+{% else %}
+  {%- assign order_details_url = order.order_status_url -%}
+{% endif %}
+<head>
+  <title>{{ email_title }}</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" type="text/css" href="/assets/notifications/styles.css">
+  <style>
+    .button__cell { background: {{ shop.email_accent_color }}; }
+    a, a:hover, a:active, a:visited { color: {{ shop.email_accent_color }}; }
+  </style>
+</head>
+
+<body>
+   <!-- ----------------------------- -----------TOP PART PANGO-------------- --------------------------------- --------------------------- -->
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+   <td align="center" style="padding:20px 0;">
+     <img
+       src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/Logo2Black.png?v=1768987921"
+       width="auto"
+       height="29"
+       alt="logo"
+       style="
+         display:block;
+         margin:0 auto;
+         width:auto;
+         height:29px;
+         object-fit:cover;
+       "
+     />
+   </td>
+ </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0" border="0" style="font-size:0; line-height:0;">
+ <tr>
+   <td align="center">
+     <table width="600" cellpadding="0" cellspacing="0" border="0" style="max-width:600px; width:100%; font-size:0; line-height:0;">
+       <tr>
+         <!-- Left image -->
+         <td width="50%" style="border:0; padding:0; font-size:0; line-height:0; height:100%;">
+           <img src="https://cdn.shopify.com/s/files/1/0967/8625/2151/files/Image_Container_izq.png?v=17682155942" alt="Left image" style="display:block; width:100%; height:100%; border:0; margin:0; padding:0; object-fit:cover;">
+         </td>
+         <!-- Right image -->
+         <td width="50%" style="border:0; padding:0; font-size:0; line-height:0; height:100%;">
+           <img src="https://cdn.shopify.com/s/files/1/0967/8625/2151/files/Image_Container_2.png?v=1768217332" alt="Right image" style="display:block; width:100%; height:100%; border:0; margin:0; padding:0; object-fit:cover;">
+         </td>
+       </tr>
+     </table>
+   </td>
+ </tr>
+</table>
+<!---------------------------------- ----------------------  END TOP PART PANGO --------------- -------------------------------------- ------------------->
+
+
+  <table class="body">
+    <tr>
+      <td>
+        <table class="header row">
+  <tr>
+    <td class="header__cell">
+      <center>
+
+        <table class="container">
+          <tr>
+            <td>
+
+              <table class="row">
+                <tr>
+                  <td class="shop-name__cell">
+                    {%- if shop.email_logo_url %}
+                      <img src="{{shop.email_logo_url}}" alt="{{ shop.name }}" width="{{ shop.email_logo_width }}">
+                    {%- else %}
+                      <h1 class="shop-name__text">
+                        <a href="{{shop.url}}">{{ shop.name }}</a>
+                      </h1>
+                    {%- endif %}
+                  </td>
+
+                    <td>
+                      <table class="order-po-number__container">
+                        <tr>
+                          <td class="order-number__cell">
+                            <span class="order-number__text">
+                              Order {{ order.name }}
+                            </span>
+                          </td>
+                        </tr>
+                        {%- if po_number %}
+                            <tr>
+                              <td class="po-number__cell">
+                                <span class="po-number__text">
+                                  PO number #{{ po_number }}
+                                </span>
+                              </td>
+                            </tr>
+                        {%- endif %}
+                      </table>
+                    </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+        </table>
+
+      </center>
+    </td>
+  </tr>
+</table>
+
+
+        <table class="row content">
+  <tr>
+    <td class="content__cell">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+          <h2>Dear {{ order.customer.first_name }},</h2>
+          <p class="return-requested__body">We are currently processing the return of your order {{ order.name }}, taking care of every detail to ensure the process is as smooth and precise as possible.</p>
+          <p>You will soon receive a confirmation once everything is completed.</p>
+          <p class="disclaimer__subtext">If you have any questions, please contact us at <a href="mailto:{{ shop.email }}">{{ shop.email }}</a></p>
+          <p>We are at your disposal to assist you at any time.</p>
+          <p>Thank you for trusting OTZLAB.</p>
+          <table class="row actions">
+  <tr>
+    <td class="empty-line">&nbsp;</td>
+  </tr>
+  <tr>
+    <td class="actions__cell">
+      <table class="button main-action-cell">
+        <tr>
+          <td class="button__cell"><a href="{{ order_details_url }}" class="button__text">View your order</a></td>
+        </tr>
+      </table>
+        <table class="link secondary-action-cell">
+          <tr>
+            <td class="link__cell">or <a href="{{ shop.url }}">Visit our store</a></td>
+          </tr>
+        </table>
+    </td>
+  </tr>
+</table>
+
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+        <table class="row section">
+  <tr>
+    <td class="section__cell">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              <h3>Return summary</h3>
+            </td>
+          </tr>
+        </table>
+        <table class="container">
+          <tr>
+            <td>
+              
+          
+<table class="row">
+  {% for line_item in return.line_items %}
+  <tr class="order-list__item">
+    <td class="order-list__item__cell">
+      <table>
+        <td>
+          {% if line_item.image %}
+            <img src="{{ line_item | img_url: 'compact_cropped' }}" align="left" width="60" height="60" class="order-list__product-image"/>
+          {% endif %}
+        </td>
+        <td class="order-list__product-description-cell">
+          {% assign line_display = line_item.quantity  %}
+
+          <span class="order-list__item-title">{{ line_item.title_without_variant }}&nbsp;&times;&nbsp;{{ line_display }}</span><br/>
+
+          {% if line_item.variant and line_item.variant.title != 'Default Title' %}
+            <span class="order-list__item-variant">{{ line_item.variant.title }}</span><br/>
+          {% endif %}
+
+          {% for group in line_item.groups %}
+            {% if group.deliverable? %}
+              <span class="order-list__item-variant">For: {{ group.display_title }}</span>
+            {% else %}
+              <span class="order-list__item-variant">Part of: {{ group.display_title }}</span>
+            {% endif %}
+            <br/>
+          {% endfor %}
+
+          {% if line_item.discount_allocations %}
+            {% for discount_allocation in line_item.discount_allocations %}
+              {% if discount_allocation.amount > 0 %}
+              <p>
+                <span class="order-list__item-discount-allocation">
+                  <img src="{{ 'notifications/discounttag.png' | shopify_asset_url }}" width="18" height="18" class="discount-tag-icon" />
+                  <span>
+                    {{ discount_allocation.discount_application.title | upcase }}
+                    (-{{ discount_allocation.amount | money }})
+                  </span>
+                </span>
+              </p>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </td>
+
+        <td class="order-list__price-cell">
+          {% if line_item.original_line_price != line_item.final_line_price %}
+            <del class="order-list__item-original-price">{{ line_item.original_line_price | money }}</del>
+          {% endif %}
+          <p class="order-list__item-price">
+            {% if line_item.final_line_price > 0 %}
+              {% capture final_line_price %}
+                  {{ line_item.final_line_price | money }}
+              {% endcapture %}
+              {{ final_line_price }}
+              {% if line_item.unit_price_measurement %}
+  <div class="order-list__unit-price">
+    {{- line_item.unit_price | unit_price_with_measurement: line_item.unit_price_measurement -}}
+  </div>
+{% endif %}
+            {% else %}
+              Free
+            {% endif %}
+          </p>
+        </td>
+      </table>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+        <table class="row footer">
+  <tr>
+    <td class="footer__cell">
+      <center>
+        <table class="container">
+          <tr>
+            <td>
+              
+              <p class="disclaimer__subtext">If you have any questions, reply to this email or contact us at <a href="mailto:{{ shop.email }}">{{ shop.email }}</a></p>
+            </td>
+          </tr>
+        </table>
+      </center>
+    </td>
+  </tr>
+</table>
+
+<img src="{{ 'notifications/spacer.png' | shopify_asset_url }}" class="spacer" height="1" />
+
+      </td>
+    </tr>
+  </table>
+<!---------------------------------- --------------- PANGO BOTTOM START----------- ------------------------- --------------------- ------------------------>   
+<table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="background-color:#ffffff;">
+ <tr style="background-image:url('https://cdn.shopify.com/s/files/1/0967/8625/2151/files/email-background-footer.png?v=1768380660'); background-size: cover;">
+   <td align="center">
+
+
+     <!-- Inner content container -->
+     <table width="100%" cellpadding="0" cellspacing="0" role="presentation" style="max-width:600px;">
+       <tr>
+         <td class="email-padding" style="padding:60px 40px; text-align:center; font-family:Arial, Helvetica, sans-serif;">
+
+
+           <!-- Title -->
+           <h2 style="
+             margin:0 0 16px 0;
+             font-family: Garamond;
+             font-size:24px;
+             line-height:32px;
+             font-weight:200;
+             color:white;
+           ">
+             Get a personalized recommendation
+           </h2>
+
+
+           <!-- Description text -->
+           <p style="
+             margin:0 0 32px 0;
+             font-size:10px;
+             line-height:24px;
+             font-family: sans-serif;
+             color:white;
+             width:'100px';
+           ">
+             Discover your signature of OTC lab scent. There is one to suit every mood, season, or memory.
+           </p>
+
+
+           <!-- Button -->
+           <a href="https://otzlabmadrid.myshopify.com/pages/scent-guide"
+              style="
+                display:inline-block;
+                padding:8px 28px;
+                font-size:10px;
+                font-weight:400;
+                color:#ffffff;
+                background-color:#000000;
+                text-decoration:none;
+                border:2px solid white;
+                           font-family: Garamond;
+              ">
+             TRY THE SCENT GUIDE
+           </a>
+
+
+         </td>
+       </tr>
+     </table>
+
+
+   </td>
+ </tr>
+</table>
+
+
+<!-- LOGO CENTER-->
+<table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+ <tr>
+   <td align="center" style="padding-top:20px; background:black;">
+     <img
+       src="https://cdn.shopify.com/s/files/1/0967/8625/2151/files/Logo2White.png?v=1764848934"
+       width="60"
+       height="9"
+       alt=""
+       style="
+         display:block;
+         margin:0 auto;
+         width:60px;
+         height:9px;
+         object-fit:cover;
+       "
+     />
+   </td>
+ </tr>
+</table>
+<!---------------------------------- --------------- PANGO SVG SOCIAL----------- ------------------------- --------------------- ------------------------>
+<table width="100%" border="0" cellspacing="0" cellpadding="0" style="background-color: #000000; color: #ffffff; font-family: Helvetica, Arial, sans-serif;">
+ <tr>
+   <td align="center" style="padding: 20px 0;">
+     <table border="0" cellspacing="0" cellpadding="0">
+       <tr>
+         <td style="padding: 0 10px;">
+           <a href="FACEBOOK_URL" target="_blank">
+       <img src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/FB.png?v=1768993416"
+            width="7"
+            height="12"
+            alt="Facebook"
+            style="display:block;border:0;">
+           </a>
+         </td>
+         <td style="padding: 0 10px;">
+           <a href="X-URL" target="_blank">
+       <img src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/X.png?v=1768993548"
+            width="12"
+            height="12"
+            alt="X"
+            style="display:block;border:0;">
+           </a>
+         </td>
+         <td style="padding: 0 10px;">
+           <a href="IG-URL" target="_blank">
+       <img src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/IG.png?v=1768993547"
+            width="14"
+            height="14"
+            alt="instagram"
+            style="display:block;border:0;">
+
+
+           </a>
+         </td>
+         <td style="padding: 0 10px;">
+           <a href="TIK-TOK_URL" target="_blank">
+       <img src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/Tiktok.png?v=1768993548"
+            width="10"
+            height="13"
+            alt="Tik-Tok"
+            style="display:block;border:0;">
+           </a>
+         </td>
+         <td style="padding: 0 10px;">
+           <a href="YOUTUBE_URL" target="_blank">
+       <img src="https://cdn.shopify.com/s/files/1/0946/9024/7043/files/Youtube.png?v=1768993547"
+            width="16"
+            height="13"
+            alt="youtube"
+            style="display:block;border:0;">
+
+
+           </a>
+         </td>
+       </tr>
+     </table>
+
+
+   </td>
+ </tr>
+</table>
+<!---------------------------------- --------------- PANGO BOTTOM END----------- ------------------------- --------------------- ------------------------>
+
+
+</body>
+</html>

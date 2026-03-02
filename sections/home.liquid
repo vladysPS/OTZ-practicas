@@ -1,0 +1,1228 @@
+<style>
+  .shopdev .text-white {
+    color: #FFFFFF;
+  }
+  
+  .shopdev .text-black {
+    color: #000000;
+  }
+  
+  .shopdev .bg-white {
+    background-color: #FFFFFF;
+  }
+  
+  .shopdev .bg-black {
+    background-color: #000000;
+  }
+  
+  .shopdev .border-white {
+    border-color: #FFFFFF;
+  }
+  
+  .shopdev .border-black {
+    border-color: #000000;
+  }
+</style>
+
+<div class="w-full bg-white">
+  <!-- Navbar Mobile -->
+  <div class="w-full bg-white px-[24px] py-[16px]">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="w-[100px] h-[33px]">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 200 | image_tag: 
+            loading: 'lazy',
+            class: 'w-full h-full object-contain',
+            alt: section.settings.logo.alt | default: shop.name
+          }}
+        {% else %}
+          <div class="w-full h-full flex items-center">
+            <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/79cb1d2b72986dac1cf5dcb8158843daa484e614.svg" />
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Header Icons -->
+      <div class="flex items-center gap-[20px]">
+        <div class="w-[25px] h-[25px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/1f9b9d11d8e6b25883c6fe0d04fb36a3f58252a9.svg" />
+        </div>
+        <div class="w-[25px] h-[25px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/370eb8ffdd2b243ababfb9388544a2664ff36347.svg" />
+        </div>
+        <div class="w-[25px] h-[25px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/04ffbde7322aafe802c0e3c9fe5fdd9c862fa376.svg" />
+        </div>
+        <div class="w-[25px] h-[25px]">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.5 7.5H2.5V8.75H22.5V7.5Z" fill="black"/>
+<path d="M22.5 16.25H2.5V17.5H22.5V16.25Z" fill="black"/>
+</svg>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Landing Homepage -->
+  <div class="w-full relative">
+    <!-- Image and Video -->
+    <div class="w-full">
+      <div class="w-full h-[393px]">
+        {%- if section.settings.hero_image != blank -%}
+          {{ section.settings.hero_image | image_url: width: 800 | image_tag: 
+            loading: 'lazy',
+            class: 'w-full h-full object-cover',
+            sizes: '100vw'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+        {%- endif -%}
+      </div>
+      <div class="w-full h-[393px] bg-gray-100"></div>
+    </div>
+    
+    <!-- Chatbot -->
+    <div class="absolute bottom-[35px] right-[18px] w-[45px] h-[45px] bg-white rounded-[23px] flex items-center justify-center shadow-lg">
+      <div class="w-[25px] h-[25px]">
+        <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/2edaad96790f4b665e558de147462e0230cf28d2.svg" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Section -->
+  <div class="w-full py-[79px] px-[20px]">
+    <!-- Title -->
+    <div class="mb-[55px]">
+      <div class="text-center mb-[10px]">
+        <p class="text-black text-[12px] font-light uppercase tracking-wide">
+          {{ section.settings.tagline }}
+        </p>
+      </div>
+      <div class="text-center">
+        <h2 class="text-black text-[40px] font-extralight leading-[100%]">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+    </div>
+
+    <!-- Product Images -->
+    <div class="relative w-full h-[484px]">
+      <!-- Blur Background Images -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="flex gap-0 h-[346px] mt-[10px]">
+          <div class="w-[281px] h-[346px] opacity-30 blur-sm">
+            {%- if section.settings.product_image_left != blank -%}
+              {{ section.settings.product_image_left | image_url: width: 600 | image_tag: 
+                loading: 'lazy',
+                class: 'w-full h-full object-cover',
+                sizes: '300px'
+              }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+            {%- endif -%}
+          </div>
+          <div class="w-[281px] h-[346px] opacity-30 blur-sm ml-[-147px]">
+            {%- if section.settings.product_image_right != blank -%}
+              {{ section.settings.product_image_right | image_url: width: 600 | image_tag: 
+                loading: 'lazy',
+                class: 'w-full h-full object-cover',
+                sizes: '300px'
+              }}
+            {%- else -%}
+              {{ 'product-2' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Product Content -->
+      <div class="relative mx-auto max-w-[301px] pt-[10px] pb-[10px] px-[10px]">
+        <div class="w-full">
+          <!-- Product Image -->
+          <div class="w-full h-[346px] mb-[18px]">
+            {%- if section.settings.featured_product_image != blank -%}
+              {{ section.settings.featured_product_image | image_url: width: 600 | image_tag: 
+                loading: 'lazy',
+                class: 'w-full h-full object-cover',
+                sizes: '300px'
+              }}
+            {%- else -%}
+              {{ 'product-3' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+            {%- endif -%}
+          </div>
+
+          <!-- Product Details -->
+          <div class="text-center mb-[18px]">
+            <h3 class="text-black text-[24px] font-extralight leading-[100%] mb-[8px]">
+              {{ section.settings.product_name }}
+            </h3>
+            <p class="text-black text-[10px] font-normal leading-[150%]">
+              {{ section.settings.product_price }}
+            </p>
+          </div>
+
+          <!-- Button -->
+          <div class="w-full">
+            {% if section.settings.button_link != blank %}
+              <a href="{{ section.settings.button_link }}" 
+                 class="block w-full h-[35px] bg-white border border-black flex items-center justify-center text-black text-[12px] font-light uppercase tracking-wide transition-all duration-300 hover:bg-black hover:text-white">
+                {{ section.settings.button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intro Homepage -->
+  <div class="w-full py-[120px] px-[43px] bg-white">
+    <div class="text-center mb-[45px]">
+      <h2 class="text-black text-[40px] font-extralight leading-[100%] mb-[45px]">
+        {{ section.settings.intro_text | newline_to_br }}
+      </h2>
+      
+      {% if section.settings.intro_button_link != blank %}
+        <a href="{{ section.settings.intro_button_link }}" 
+           class="inline-block w-full max-w-[280px] h-[35px] bg-white border border-black flex items-center justify-center text-black text-[12px] font-light uppercase tracking-wide transition-all duration-300 hover:bg-black hover:text-white mx-auto">
+          {{ section.settings.intro_button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Essence Module -->
+  <div class="w-full h-[550px] bg-white px-[33px] py-[45px]">
+    {%- if section.settings.essence_image != blank -%}
+      {{ section.settings.essence_image | image_url: width: 800 | image_tag: 
+        loading: 'lazy',
+        class: 'w-full h-full object-cover',
+        sizes: '100vw'
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+    {%- endif -%}
+  </div>
+
+  <!-- Product Dark Section -->
+  <div class="w-full bg-black py-[64px] px-[17px]">
+    <div class="text-center mb-[58px]">
+      <h2 class="text-white text-[60px] font-extralight leading-[100%] mb-[58px]">
+        {{ section.settings.essence_heading | newline_to_br }}
+      </h2>
+      
+      <div class="w-full max-w-[308px] h-[179px] mx-auto mb-[57px]">
+        {%- if section.settings.essence_product_image != blank -%}
+          {{ section.settings.essence_product_image | image_url: width: 400 | image_tag: 
+            loading: 'lazy',
+            class: 'w-full h-full object-contain',
+            sizes: '300px'
+          }}
+        {%- else -%}
+          {{ 'product-4' | placeholder_svg_tag: 'w-full h-full bg-gray-700' }}
+        {%- endif -%}
+      </div>
+
+      {% if section.settings.essence_button_link != blank %}
+        <a href="{{ section.settings.essence_button_link }}" 
+           class="inline-block w-full max-w-[280px] h-[35px] bg-black border border-white flex items-center justify-center text-white text-[12px] font-light uppercase tracking-wide transition-all duration-300 hover:bg-white hover:text-black mx-auto">
+          {{ section.settings.essence_button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Film Module -->
+  <div class="w-full h-[550px] bg-gray-900 relative">
+    {%- if section.settings.film_video != blank -%}
+      {{ section.settings.film_video | video_tag: 
+        autoplay: true,
+        loop: true,
+        muted: true,
+        class: 'w-full h-full object-cover'
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full bg-gray-800' }}
+    {%- endif -%}
+    
+    <!-- Film Controls -->
+    <div class="absolute bottom-[32px] right-[18px] flex gap-[10px]">
+      <div class="w-[44px] h-[34px] bg-white flex items-center justify-center">
+        <div class="w-[15px] h-[15px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/a075d3f598a039c57bc0da794431fd0904d64e56.svg" />
+        </div>
+      </div>
+      <div class="w-[44px] h-[34px] bg-white flex items-center justify-center">
+        <div class="w-[15px] h-[15px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/c73a57a3ed6e4a16edb28c64ec3ee7e0c13a15c3.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intensity Range -->
+  <div class="w-full bg-white py-[50px]">
+    <div class="px-[18px]">
+      <!-- Intensity Details -->
+      <div class="text-center mb-[40px]">
+        <h2 class="text-black text-[40px] font-extralight leading-[100%] mb-[20px]">
+          {{ section.settings.spectrum_heading | newline_to_br }}
+        </h2>
+        <p class="text-black text-[12px] font-light uppercase tracking-wide leading-[120%]">
+          {{ section.settings.spectrum_description }}
+        </p>
+      </div>
+
+      <!-- Intensity Levels -->
+      <div class="flex items-center justify-center gap-[16px] mb-[40px]">
+        <span class="text-black text-[10px] font-light uppercase">1</span>
+        <span class="text-black text-[10px] font-light uppercase">2 LUMIÈRES</span>
+        <span class="text-black text-[10px] font-light uppercase">3</span>
+        <span class="text-black text-[10px] font-light uppercase">4</span>
+        <span class="text-black text-[10px] font-light uppercase">5</span>
+        <span class="text-black text-[10px] font-light uppercase">6</span>
+        <span class="text-black text-[10px] font-light uppercase">7</span>
+        <span class="text-black text-[10px] font-light uppercase">8</span>
+      </div>
+
+      <!-- Soundscape Cards -->
+      <div class="flex flex-col gap-[2px] overflow-x-auto mb-[50px]">
+        <div class="flex gap-[2px] min-w-max">
+          {% for block in section.blocks %}
+            <div class="relative" style="width: {{ block.settings.card_width }}px; height: {{ block.settings.card_height }}px;" {{ block.shopify_attributes }}>
+              {%- if block.settings.card_image != blank -%}
+                {{ block.settings.card_image | image_url: width: 400 | image_tag: 
+                  loading: 'lazy',
+                  class: 'w-full h-full object-cover',
+                  sizes: '300px'
+                }}
+              {%- else -%}
+                {%- assign placeholder_index = forloop.index | modulo: 6 -%}
+                {%- if placeholder_index == 0 -%}
+                  {%- assign placeholder_index = 6 -%}
+                {%- endif -%}
+                {{ 'product-' | append: placeholder_index | placeholder_svg_tag: 'w-full h-full bg-gray-300' }}
+              {%- endif -%}
+              
+              <div class="absolute top-[14px] left-[11px]">
+                <p class="text-white text-[10px] font-light uppercase leading-[120%]">
+                  {{ block.settings.card_label | newline_to_br }}
+                </p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Button -->
+      {% if section.settings.spectrum_button_link != blank %}
+        <div class="text-center">
+          <a href="{{ section.settings.spectrum_button_link }}" 
+             class="inline-block w-full max-w-[280px] h-[35px] bg-white border border-black flex items-center justify-center text-black text-[12px] font-light uppercase tracking-wide transition-all duration-300 hover:bg-black hover:text-white mx-auto">
+            {{ section.settings.spectrum_button_text }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{
+  "name": "Fragrance Hero Banner",
+  "class": "shopdev",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "header",
+      "content": "Product Section"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_left",
+      "label": "Product Image Left"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_right",
+      "label": "Product Image Right"
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_product_image",
+      "label": "Featured Product Image"
+    },
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Product Name"
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "Product Price"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Intro Section"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro Text"
+    },
+    {
+      "type": "text",
+      "id": "intro_button_text",
+      "label": "Intro Button Text"
+    },
+    {
+      "type": "url",
+      "id": "intro_button_link",
+      "label": "Intro Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Essence Module"
+    },
+    {
+      "type": "image_picker",
+      "id": "essence_image",
+      "label": "Essence Image"
+    },
+    {
+      "type": "header",
+      "content": "Dark Product Section"
+    },
+    {
+      "type": "textarea",
+      "id": "essence_heading",
+      "label": "Essence Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "essence_product_image",
+      "label": "Essence Product Image"
+    },
+    {
+      "type": "text",
+      "id": "essence_button_text",
+      "label": "Essence Button Text"
+    },
+    {
+      "type": "url",
+      "id": "essence_button_link",
+      "label": "Essence Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Film Module"
+    },
+    {
+      "type": "video",
+      "id": "film_video",
+      "label": "Film Video"
+    },
+    {
+      "type": "header",
+      "content": "Scented Spectrum"
+    },
+    {
+      "type": "textarea",
+      "id": "spectrum_heading",
+      "label": "Spectrum Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "spectrum_description",
+      "label": "Spectrum Description"
+    },
+    {
+      "type": "text",
+      "id": "spectrum_button_text",
+      "label": "Spectrum Button Text"
+    },
+    {
+      "type": "url",
+      "id": "spectrum_button_link",
+      "label": "Spectrum Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "soundscape_card",
+      "name": "Soundscape Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Card Image"
+        },
+        {
+          "type": "textarea",
+          "id": "card_label",
+          "label": "Card Label"
+        },
+        {
+          "type": "range",
+          "id": "card_width",
+          "min": 150,
+          "max": 325,
+          "step": 25,
+          "unit": "px",
+          "label": "Card Width",
+          "default": 175
+        },
+        {
+          "type": "range",
+          "id": "card_height",
+          "min": 175,
+          "max": 379,
+          "step": 25,
+          "unit": "px",
+          "label": "Card Height",
+          "default": 250
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fragrance Hero Banner",
+      "settings": {
+        "tagline": "EXPLORE",
+        "heading": "OUR FRAGANCES",
+        "product_name": "LANCES",
+        "product_price": "$250",
+        "button_text": "shop now",
+        "intro_text": "We transform sensations into passions, encapsulating the purest and deepest essence of our roots in perfumes.",
+        "intro_button_text": "DISCOVER THE COLLECTION",
+        "essence_heading": "The essence of emotion, captured in fragrance.",
+        "essence_button_text": "LEARN MORE",
+        "spectrum_heading": "OUR SCENTED\nSPECTRUM",
+        "spectrum_description": "Our collection unfolds like a symphony, beginning with soft, luminous scents that whisper on the skin, gradually building towards deeper, more opulent creations.",
+        "spectrum_button_text": "DISCOVER YOUR SCENT"
+      },
+      "blocks": [
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 01 ]\nAIR",
+            "card_width": 150,
+            "card_height": 175
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 02 ]\nLUMIÈRES",
+            "card_width": 175,
+            "card_height": 204
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 03 ]\nRAÍCES",
+            "card_width": 200,
+            "card_height": 234
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 04 ]\nMERINA",
+            "card_width": 225,
+            "card_height": 263
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 05 ]\nARCADIA",
+            "card_width": 250,
+            "card_height": 292
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 06 ]\nlances",
+            "card_width": 275,
+            "card_height": 321
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 07 ]\nEL CAMINANTE",
+            "card_width": 300,
+            "card_height": <style>
+  .shopdev .text-white {
+    color: #FFFFFF;
+  }
+  
+  .shopdev .text-black {
+    color: #000000;
+  }
+  
+  .shopdev .bg-white {
+    background-color: #FFFFFF;
+  }
+  
+  .shopdev .bg-black {
+    background-color: #000000;
+  }
+  
+  .shopdev .border-white {
+    border-color: #FFFFFF;
+  }
+  
+  .shopdev .border-black {
+    border-color: #000000;
+  }
+</style>
+
+<div class="w-full bg-white">
+  <!-- Navbar Mobile -->
+  <div class="w-full bg-white px-[24px] py-[16px]">
+    <div class="flex items-center justify-between">
+      <!-- Logo -->
+      <div class="w-[100px] h-[33px]">
+        {% if section.settings.logo != blank %}
+          {{ section.settings.logo | image_url: width: 200 | image_tag: 
+            loading: 'lazy',
+            class: 'w-full h-full object-contain',
+            alt: section.settings.logo.alt | default: shop.name
+          }}
+        {% else %}
+          <div class="w-full h-full flex items-center">
+            <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/79cb1d2b72986dac1cf5dcb8158843daa484e614.svg" />
+          </div>
+        {% endif %}
+      </div>
+      
+      <!-- Header Icons -->
+      <div class="flex items-center gap-[20px]">
+        <div class="w-[25px] h-[25px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/1f9b9d11d8e6b25883c6fe0d04fb36a3f58252a9.svg" />
+        </div>
+        <div class="w-[25px] h-[25px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/370eb8ffdd2b243ababfb9388544a2664ff36347.svg" />
+        </div>
+        <div class="w-[25px] h-[25px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/04ffbde7322aafe802c0e3c9fe5fdd9c862fa376.svg" />
+        </div>
+        <div class="w-[25px] h-[25px]">
+          <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.5 7.5H2.5V8.75H22.5V7.5Z" fill="black"/>
+<path d="M22.5 16.25H2.5V17.5H22.5V16.25Z" fill="black"/>
+</svg>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Landing Homepage -->
+  <div class="w-full relative">
+    <!-- Image and Video -->
+    <div class="w-full">
+      <div class="w-full h-[393px]">
+        {%- if section.settings.hero_image != blank -%}
+          {{ section.settings.hero_image | image_url: width: 800 | image_tag: 
+            loading: 'lazy',
+            class: 'w-full h-full object-cover',
+            sizes: '100vw'
+          }}
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+        {%- endif -%}
+      </div>
+      <div class="w-full h-[393px] bg-gray-100"></div>
+    </div>
+    
+    <!-- Chatbot -->
+    <div class="absolute bottom-[35px] right-[18px] w-[45px] h-[45px] bg-white rounded-[23px] flex items-center justify-center shadow-lg">
+      <div class="w-[25px] h-[25px]">
+        <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/2edaad96790f4b665e558de147462e0230cf28d2.svg" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Section -->
+  <div class="w-full py-[79px] px-[20px]">
+    <!-- Title -->
+    <div class="mb-[55px]">
+      <div class="text-center mb-[10px]">
+        <p class="text-black text-[12px] font-light uppercase tracking-wide">
+          {{ section.settings.tagline }}
+        </p>
+      </div>
+      <div class="text-center">
+        <h2 class="text-black text-[40px] font-extralight leading-[100%]">
+          {{ section.settings.heading }}
+        </h2>
+      </div>
+    </div>
+
+    <!-- Product Images -->
+    <div class="relative w-full h-[484px]">
+      <!-- Blur Background Images -->
+      <div class="absolute inset-0 overflow-hidden">
+        <div class="flex gap-0 h-[346px] mt-[10px]">
+          <div class="w-[281px] h-[346px] opacity-30 blur-sm">
+            {%- if section.settings.product_image_left != blank -%}
+              {{ section.settings.product_image_left | image_url: width: 600 | image_tag: 
+                loading: 'lazy',
+                class: 'w-full h-full object-cover',
+                sizes: '300px'
+              }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+            {%- endif -%}
+          </div>
+          <div class="w-[281px] h-[346px] opacity-30 blur-sm ml-[-147px]">
+            {%- if section.settings.product_image_right != blank -%}
+              {{ section.settings.product_image_right | image_url: width: 600 | image_tag: 
+                loading: 'lazy',
+                class: 'w-full h-full object-cover',
+                sizes: '300px'
+              }}
+            {%- else -%}
+              {{ 'product-2' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Product Content -->
+      <div class="relative mx-auto max-w-[301px] pt-[10px] pb-[10px] px-[10px]">
+        <div class="w-full">
+          <!-- Product Image -->
+          <div class="w-full h-[346px] mb-[18px]">
+            {%- if section.settings.featured_product_image != blank -%}
+              {{ section.settings.featured_product_image | image_url: width: 600 | image_tag: 
+                loading: 'lazy',
+                class: 'w-full h-full object-cover',
+                sizes: '300px'
+              }}
+            {%- else -%}
+              {{ 'product-3' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+            {%- endif -%}
+          </div>
+
+          <!-- Product Details -->
+          <div class="text-center mb-[18px]">
+            <h3 class="text-black text-[24px] font-extralight leading-[100%] mb-[8px]">
+              {{ section.settings.product_name }}
+            </h3>
+            <p class="text-black text-[10px] font-normal leading-[150%]">
+              {{ section.settings.product_price }}
+            </p>
+          </div>
+
+          <!-- Button -->
+          <div class="w-full">
+            {% if section.settings.button_link != blank %}
+              <a href="{{ section.settings.button_link }}" 
+                 class="block w-full h-[35px] bg-white border border-black flex items-center justify-center text-black text-[12px] font-light uppercase tracking-wide transition-all duration-300 hover:bg-black hover:text-white">
+                {{ section.settings.button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intro Homepage -->
+  <div class="w-full py-[120px] px-[43px] bg-white">
+    <div class="text-center mb-[45px]">
+      <h2 class="text-black text-[40px] font-extralight leading-[100%] mb-[45px]">
+        {{ section.settings.intro_text | newline_to_br }}
+      </h2>
+      
+      {% if section.settings.intro_button_link != blank %}
+        <a href="{{ section.settings.intro_button_link }}" 
+           class="inline-block w-full max-w-[280px] h-[35px] bg-white border border-black flex items-center justify-center text-black text-[12px] font-light uppercase tracking-wide transition-all duration-300 hover:bg-black hover:text-white mx-auto">
+          {{ section.settings.intro_button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Essence Module -->
+  <div class="w-full h-[550px] bg-white px-[33px] py-[45px]">
+    {%- if section.settings.essence_image != blank -%}
+      {{ section.settings.essence_image | image_url: width: 800 | image_tag: 
+        loading: 'lazy',
+        class: 'w-full h-full object-cover',
+        sizes: '100vw'
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full bg-gray-200' }}
+    {%- endif -%}
+  </div>
+
+  <!-- Product Dark Section -->
+  <div class="w-full bg-black py-[64px] px-[17px]">
+    <div class="text-center mb-[58px]">
+      <h2 class="text-white text-[60px] font-extralight leading-[100%] mb-[58px]">
+        {{ section.settings.essence_heading | newline_to_br }}
+      </h2>
+      
+      <div class="w-full max-w-[308px] h-[179px] mx-auto mb-[57px]">
+        {%- if section.settings.essence_product_image != blank -%}
+          {{ section.settings.essence_product_image | image_url: width: 400 | image_tag: 
+            loading: 'lazy',
+            class: 'w-full h-full object-contain',
+            sizes: '300px'
+          }}
+        {%- else -%}
+          {{ 'product-4' | placeholder_svg_tag: 'w-full h-full bg-gray-700' }}
+        {%- endif -%}
+      </div>
+
+      {% if section.settings.essence_button_link != blank %}
+        <a href="{{ section.settings.essence_button_link }}" 
+           class="inline-block w-full max-w-[280px] h-[35px] bg-black border border-white flex items-center justify-center text-white text-[12px] font-light uppercase tracking-wide transition-all duration-300 hover:bg-white hover:text-black mx-auto">
+          {{ section.settings.essence_button_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Film Module -->
+  <div class="w-full h-[550px] bg-gray-900 relative">
+    {%- if section.settings.film_video != blank -%}
+      {{ section.settings.film_video | video_tag: 
+        autoplay: true,
+        loop: true,
+        muted: true,
+        class: 'w-full h-full object-cover'
+      }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'w-full h-full bg-gray-800' }}
+    {%- endif -%}
+    
+    <!-- Film Controls -->
+    <div class="absolute bottom-[32px] right-[18px] flex gap-[10px]">
+      <div class="w-[44px] h-[34px] bg-white flex items-center justify-center">
+        <div class="w-[15px] h-[15px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/a075d3f598a039c57bc0da794431fd0904d64e56.svg" />
+        </div>
+      </div>
+      <div class="w-[44px] h-[34px] bg-white flex items-center justify-center">
+        <div class="w-[15px] h-[15px]">
+          <img src="https://assets.shopdev.ai/figma-imports/41919242-e66a-4323-8750-9f57d873b085/c73a57a3ed6e4a16edb28c64ec3ee7e0c13a15c3.svg" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Intensity Range -->
+  <div class="w-full bg-white py-[50px]">
+    <div class="px-[18px]">
+      <!-- Intensity Details -->
+      <div class="text-center mb-[40px]">
+        <h2 class="text-black text-[40px] font-extralight leading-[100%] mb-[20px]">
+          {{ section.settings.spectrum_heading | newline_to_br }}
+        </h2>
+        <p class="text-black text-[12px] font-light uppercase tracking-wide leading-[120%]">
+          {{ section.settings.spectrum_description }}
+        </p>
+      </div>
+
+      <!-- Intensity Levels -->
+      <div class="flex items-center justify-center gap-[16px] mb-[40px]">
+        <span class="text-black text-[10px] font-light uppercase">1</span>
+        <span class="text-black text-[10px] font-light uppercase">2 LUMIÈRES</span>
+        <span class="text-black text-[10px] font-light uppercase">3</span>
+        <span class="text-black text-[10px] font-light uppercase">4</span>
+        <span class="text-black text-[10px] font-light uppercase">5</span>
+        <span class="text-black text-[10px] font-light uppercase">6</span>
+        <span class="text-black text-[10px] font-light uppercase">7</span>
+        <span class="text-black text-[10px] font-light uppercase">8</span>
+      </div>
+
+      <!-- Soundscape Cards -->
+      <div class="flex flex-col gap-[2px] overflow-x-auto mb-[50px]">
+        <div class="flex gap-[2px] min-w-max">
+          {% for block in section.blocks %}
+            <div class="relative" style="width: {{ block.settings.card_width }}px; height: {{ block.settings.card_height }}px;" {{ block.shopify_attributes }}>
+              {%- if block.settings.card_image != blank -%}
+                {{ block.settings.card_image | image_url: width: 400 | image_tag: 
+                  loading: 'lazy',
+                  class: 'w-full h-full object-cover',
+                  sizes: '300px'
+                }}
+              {%- else -%}
+                {%- assign placeholder_index = forloop.index | modulo: 6 -%}
+                {%- if placeholder_index == 0 -%}
+                  {%- assign placeholder_index = 6 -%}
+                {%- endif -%}
+                {{ 'product-' | append: placeholder_index | placeholder_svg_tag: 'w-full h-full bg-gray-300' }}
+              {%- endif -%}
+              
+              <div class="absolute top-[14px] left-[11px]">
+                <p class="text-white text-[10px] font-light uppercase leading-[120%]">
+                  {{ block.settings.card_label | newline_to_br }}
+                </p>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Button -->
+      {% if section.settings.spectrum_button_link != blank %}
+        <div class="text-center">
+          <a href="{{ section.settings.spectrum_button_link }}" 
+             class="inline-block w-full max-w-[280px] h-[35px] bg-white border border-black flex items-center justify-center text-black text-[12px] font-light uppercase tracking-wide transition-all duration-300 hover:bg-black hover:text-white mx-auto">
+            {{ section.settings.spectrum_button_text }}
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{
+  "name": "Fragrance Hero Banner",
+  "class": "shopdev",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Logo"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo Image"
+    },
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero Image"
+    },
+    {
+      "type": "header",
+      "content": "Product Section"
+    },
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_left",
+      "label": "Product Image Left"
+    },
+    {
+      "type": "image_picker",
+      "id": "product_image_right",
+      "label": "Product Image Right"
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_product_image",
+      "label": "Featured Product Image"
+    },
+    {
+      "type": "text",
+      "id": "product_name",
+      "label": "Product Name"
+    },
+    {
+      "type": "text",
+      "id": "product_price",
+      "label": "Product Price"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Intro Section"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Intro Text"
+    },
+    {
+      "type": "text",
+      "id": "intro_button_text",
+      "label": "Intro Button Text"
+    },
+    {
+      "type": "url",
+      "id": "intro_button_link",
+      "label": "Intro Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Essence Module"
+    },
+    {
+      "type": "image_picker",
+      "id": "essence_image",
+      "label": "Essence Image"
+    },
+    {
+      "type": "header",
+      "content": "Dark Product Section"
+    },
+    {
+      "type": "textarea",
+      "id": "essence_heading",
+      "label": "Essence Heading"
+    },
+    {
+      "type": "image_picker",
+      "id": "essence_product_image",
+      "label": "Essence Product Image"
+    },
+    {
+      "type": "text",
+      "id": "essence_button_text",
+      "label": "Essence Button Text"
+    },
+    {
+      "type": "url",
+      "id": "essence_button_link",
+      "label": "Essence Button Link"
+    },
+    {
+      "type": "header",
+      "content": "Film Module"
+    },
+    {
+      "type": "video",
+      "id": "film_video",
+      "label": "Film Video"
+    },
+    {
+      "type": "header",
+      "content": "Scented Spectrum"
+    },
+    {
+      "type": "textarea",
+      "id": "spectrum_heading",
+      "label": "Spectrum Heading"
+    },
+    {
+      "type": "textarea",
+      "id": "spectrum_description",
+      "label": "Spectrum Description"
+    },
+    {
+      "type": "text",
+      "id": "spectrum_button_text",
+      "label": "Spectrum Button Text"
+    },
+    {
+      "type": "url",
+      "id": "spectrum_button_link",
+      "label": "Spectrum Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "soundscape_card",
+      "name": "Soundscape Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "card_image",
+          "label": "Card Image"
+        },
+        {
+          "type": "textarea",
+          "id": "card_label",
+          "label": "Card Label"
+        },
+        {
+          "type": "range",
+          "id": "card_width",
+          "min": 150,
+          "max": 325,
+          "step": 25,
+          "unit": "px",
+          "label": "Card Width",
+          "default": 175
+        },
+        {
+          "type": "range",
+          "id": "card_height",
+          "min": 175,
+          "max": 379,
+          "step": 25,
+          "unit": "px",
+          "label": "Card Height",
+          "default": 250
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Fragrance Hero Banner",
+      "settings": {
+        "tagline": "EXPLORE",
+        "heading": "OUR FRAGANCES",
+        "product_name": "LANCES",
+        "product_price": "$250",
+        "button_text": "shop now",
+        "intro_text": "We transform sensations into passions, encapsulating the purest and deepest essence of our roots in perfumes.",
+        "intro_button_text": "DISCOVER THE COLLECTION",
+        "essence_heading": "The essence of emotion, captured in fragrance.",
+        "essence_button_text": "LEARN MORE",
+        "spectrum_heading": "OUR SCENTED\nSPECTRUM",
+        "spectrum_description": "Our collection unfolds like a symphony, beginning with soft, luminous scents that whisper on the skin, gradually building towards deeper, more opulent creations.",
+        "spectrum_button_text": "DISCOVER YOUR SCENT"
+      },
+      "blocks": [
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 01 ]\nAIR",
+            "card_width": 150,
+            "card_height": 379
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 02 ]\nLUMIÈRES",
+            "card_width": 175,
+            "card_height": 379
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 03 ]\nRAÍCES",
+            "card_width": 200,
+            "card_height": 379
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 04 ]\nMERINA",
+            "card_width": 225,
+            "card_height": 379
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 05 ]\nARCADIA",
+            "card_width": 250,
+            "card_height": 379
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 06 ]\nlances",
+            "card_width": 275,
+            "card_height": 379
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 07 ]\nEL CAMINANTE",
+            "card_width": 300,
+            "card_height": 379
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 08 ]\nZAGAL",
+            "card_width": 325,
+            "card_height": 379
+          }
+        }
+      ]
+    }
+  ]
+}
+
+          }
+        },
+        {
+          "type": "soundscape_card",
+          "settings": {
+            "card_label": "[ 08 ]\nZAGAL",
+            "card_width": 325,
+            "card_height": 379
+          }
+        }
+      ]
+    }
+  ]
+}

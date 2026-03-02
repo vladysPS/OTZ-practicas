@@ -1,0 +1,244 @@
+<!-- pango-OTZ-prod-info.liquid -->
+{%- assign current_product = product | default: closest.product -%}
+{%- assign selected_variant = current_product.selected_or_first_available_variant -%}
+
+
+<section class="p-{{ section.id }}">
+ <div class="p-page-width">
+    <div class="p-prod-content">
+            <div class="p-content-container">
+                <h1>{{ closest.product.title }}</h1>
+    
+                <div class="p-prod-extra-info">
+                    <span class="scent-attribute">{{ closest.product.metafields.custom.otz_scent_attributes }}</span>
+                    <span class="fragrance-concentration">{{ closest.product.metafields.custom.otz_fragrance_concentration}}</span>
+                </div>
+    
+                <div class="p-prod-description-container">
+                    {{ closest.product.description }}
+                </div>
+    
+                {% content_for 'block', type: 'price', id: 'product-price', closest.product: product %}
+    
+                <div class="p-prod-actions">
+                    {% form 'product', current_product %}
+                    <input type="hidden" name="id" value="{{ selected_variant.id }}">
+                        {% content_for 'block', type: 'variant-picker', id: 'variant-picker', closest.product: current_product %}
+                        <div class="quantity-text">
+                            <p>
+                                Quantity
+                            </p>
+                        </div>
+                        {% content_for 'block', type: 'buy-buttons', id: 'buy-buttons', closest.product: current_product %}                
+                    {% endform %}
+                </div>
+
+                {% content_for 'block', type: 'accordion', id: 'accordion', closest.product: current_product %}
+            </div>
+    </div>
+
+    <div class="p-prod-gallery">
+        <div class="swiper mySwiperGallery">
+            <div class="swiper-wrapper">
+                {% for image in current_product.images %}
+                    <div class="swiper-slide">
+                        {{ image | image_url: width: 800 | image_tag: alt: image.alt | escape }}
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    
+ </div> 
+</section>
+
+
+
+
+{%  # CSS  %}
+<style>
+.p-{{ section.id }}{
+    .p-page-width{
+        display:flex;
+        flex-direction:column-reverse;
+        .p-prod-content{
+            width:100%;
+            height:100%;
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            .p-content-container{
+                max-width: 500px;
+                padding:50px;
+                h1{
+                    font-family:'Alpina-Thin';
+                    text-transform: uppercase;
+                    font-weight:250;
+                    font-size: 40px;
+                    margin:0;
+                }
+                .p-prod-extra-info{
+                    display:flex;
+                    flex-direction:column;
+                    padding:15px 0 25px 0;
+                    span{
+                        font-family:'Alpina-Light';
+                    }
+                    .scent-attribute{
+                        color:black;
+                    }
+                    .fragrance-concentration{
+                        color:#00000078;
+                    }
+                }
+                product-price{
+                    padding:20px 0;
+                }
+                variant-picker{
+                    fieldset{
+                    width:fit-content;
+                    grid-template-columns: repeat(3, auto);                        
+                        legend{
+                            font-family:'Alpina-Light';
+                            text-transform: uppercase;
+                        }
+                        label{
+                            width: 64px;
+                            height: 20px;
+                            font-size: 10px;
+                        }
+                    }
+                }
+                .quantity-text{
+                    p{
+                            font-family:'Alpina-Light';
+                            text-transform: uppercase;  
+                            margin:10px 0 15px 0;                  
+                    }
+                }
+                .product-form-buttons{
+                    flex-direction: column;
+                    quantity-selector-component{
+                        width:fit-content;
+                        height:fit-content;
+                        --quantity-selector-width:fit-content;
+                        padding:5px;
+                        input{
+                            width:20px;
+                            font-size:12px;
+                        }
+                        button{
+                            width:12px;
+                            height:12px;
+                        }
+                    }
+                }
+            }
+        }
+        .p-prod-gallery{
+            width:100%;
+            .swiper {
+            width: 100%;
+            height: 100%;
+                .swiper-pagination {
+                    gap:0;
+                    .swiper-pagination-bullet{
+                        margin:0;
+                        border-radius:0;
+                        background:white;
+                        width:59px;
+                        height:3px;
+                    }
+                }
+            }
+
+            .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #444;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            }
+        }
+    }
+
+}
+
+
+@media(min-width:768px){
+ .p-{{ section.id }}{
+    height:93vh;
+    .p-page-width{
+        flex-direction:row;
+        height:100%;
+        .p-prod-content{
+            width:50%;
+            height:100%; 
+            .p-content-container{
+            padding-inline:50px;
+            }   
+        }
+        .p-prod-gallery{
+            width:50%;
+            height:100%;
+            .swiper{
+                .swiper-pagination {
+                  right: 16px;  
+                    .swiper-pagination-bullet{
+                        width:3px;
+                        height:59px;
+                    }
+              }
+
+            }
+        }
+    }
+ }
+}
+
+@media(min-width:1600px){
+    .p-{{ section.id }}{
+        max-height:970px;
+    }
+}
+
+
+</style>
+
+
+{%  # JAVASCRIPT  %}
+<script>
+const gallerySection = document.querySelector(".p-{{ section.id }}");
+const gallerySlider = gallerySection.querySelector(".mySwiperGallery");
+
+let swiper = new Swiper(gallerySlider, {
+    pagination: {
+    el: ".swiper-pagination",
+    },
+    breakpoints:{
+        768:{
+            direction: "vertical"
+        }
+    }
+});
+</script>
+
+
+{% schema %}
+ {
+ "name": "pango OTZ product info",
+ "enabled_on":{
+    "templates": ["product"]
+ },
+ "settings": [],
+ "presets": [
+   {
+     "name": "pango OTZ product info",
+     "category": "All Pango"
+   }
+ ]
+} 
+{% endschema %}
+

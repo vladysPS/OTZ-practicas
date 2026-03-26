@@ -8,6 +8,11 @@
  * ------------------------------------------------------------
  */
 {
+  "pango":{
+    "newsletter":{
+      "label":"E-mail"
+    }
+  },
   "accessibility": {
     "account": "Account",
     "cart": "Cart",

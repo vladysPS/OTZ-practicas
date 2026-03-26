@@ -1,6 +1,12 @@
 @font-face { font-family: Alpina-Thin; src: url('https://cdn.shopify.com/s/files/1/0946/9024/7043/files/GT-Alpina-Condensed-Thin.otf?v=1765281403'); }
 @font-face { font-family: Alpina-Typewriter; src: url('https://cdn.shopify.com/s/files/1/0946/9024/7043/files/GT-Alpina-Typewriter-Light.ttf?v=1765281425'); }
 
+.alpina-typewriter{
+  font-family: Alpina-Typewriter;
+}
+.alpina-thin{
+  font-family: Alpina-Thin;
+}
 
 :root {
   --vid-1-w: 324px;

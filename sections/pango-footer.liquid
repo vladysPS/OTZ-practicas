@@ -2,8 +2,61 @@
 
 
 <footer class="p-{{ section.id }}">
- <div class="page-width">
-  this is going to be a cool footer
+ <div class="p-footer-container page-width">
+  <div class="p-top div p-red">
+    <h4 class="alpina-thin">
+      You are invited <br> <span>to discover our world</span>
+    </h4>
+    <p>
+      Receive intimate access to our perfumers’ craft and the inspirations that shape each fragrance.
+    </p>
+    <div class="p-mail-container">
+    {% form 'customer' %}
+        <div class="p-email-container">
+            <input class="p-email-input" type="email" name="contact[email]" autocomplete="email" placeholder="{{ 'pango.newsletter.label' | t }}" required/>
+            
+            <button type="submit" class="p-submit-button" name="commit" id="Subscribe" aria-label="Subscribe to our newsletter">
+                {{- 'icon-arrow.svg' | inline_asset_content -}}
+            </button>
+        </div>
+
+        {%- if form.errors -%}
+            <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+        {%- endif -%}
+        {%- if form.posted_successfully? -%}
+            <div class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{{ 'newsletter.success' | t }}</div>
+        {%- endif -%}            
+
+    {% endform %}
+    </div>
+  </div>
+
+  <div class="logo-container p-pink">
+    logo here OTZLAB
+  </div>
+  <div class="p-footer-menu-container p-green">
+    <li>FAQ</li>
+    <li>DELIVERY AND RETURNS</li>
+    <li>CONTACT US</li>
+    <li>CONUTRY REGION</li>
+  </div>
+
+  <div class="p-bottom-container p-blue" >
+    <div>OTZLAB. All rights reserved.</div>
+    <div class="p-legal-links">
+      <li>Privacy Policy</li>
+      <li>Terms of service</li>
+      <li>Cookie settings</li>
+    </div>
+    <div class="p-social-links">
+      <a href="">facebook</a>
+      <a href="">twitter</a>
+      <a href="">instagram</a>
+      <a href="">tiktok</a>
+      <a href="">youtube</a>
+    </div>
+  </div>
+  
  </div> 
 </footer>
 
@@ -13,7 +66,9 @@
 {%  # CSS  %}
 <style>
 .p-{{ section.id }}{
-
+.p-footer-container{
+  text-align:center;
+}
 
 }
 

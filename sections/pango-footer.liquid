@@ -1,15 +1,19 @@
 <!-- pango-footer.liquid -->
-
+{%- assign legal_menu = section.settings.legal_menu.links -%}
+{%- for link in legal_menu -%}
+  {{ link.title | link_to: link.url }}
+{%- endfor -%}
 
 <footer class="p-{{ section.id }}">
  <div class="p-footer-container page-width">
-  <div class="p-top-cont">
+{%- for block in section.blocks -%}
+  {%- case block.type -%}
+  {%- when 'newsletter_text' -%}
+      <div class="p-top-cont">
     <h4 class="alpina-thin">
-      You are invited <br> <span>to discover our world</span>
+      {{ block.settings.title }} 
     </h4>
-    <p>
-      Receive intimate access to our perfumers’ craft and the inspirations that shape each fragrance.
-    </p>
+      {{ block.settings.description }}
     <div class="p-mail-container">
     {% form 'customer' %}
         <div class="p-email-container">
@@ -29,34 +33,52 @@
 
     {% endform %}
     </div>
-  </div>
-  <div class="logo-container">
-    {{ 'logo-white.svg' | inline_asset_content }}
-  </div>
-  <div class="p-footer-menu-container">
-    <ul class="alpina-typewriter">
-      <li>FAQ</li>
-      <li>DELIVERY AND RETURNS</li>
-      <li>CONTACT US</li>
-      <li>CONUTRY REGION</li>
-    </ul>
-  </div>
+    </div>
+  {%- when 'logo' -%}
+    <div class="logo-container">
+        {%- assign image_picker_0 = block.settings.image_picker_0 -%}
+        {{ image_picker_0 | image_url: width: image_picker_0.width | image_tag: class: 'add_your_class_here', loading: 'lazy' }}
+    </div>
+  {%- when 'footer_menu' -%}
+      {%- assign footer_menu = block.settings.footer_menu.links -%}
+        <div class="p-footer-menu-container">
+        <ul class="alpina-typewriter">
+            {%- for link in footer_menu -%}
+              <li>{{ link.title | link_to: link.url }}</li>              
+            {%- endfor -%}
+        </ul>
+      </div>
+
+  {%- endcase -%} 
+{%- endfor -%}
+
   <div class="p-bottom-container" >
     
       <div class="copyright"><span>© OTZLAB.</span> All rights reserved.</div>
       <div class="p-legal-links">
-        <ul >        
-          <li>Privacy Policy</li>
-          <li>Terms of service</li>
-          <li>Cookie settings</li>
+        {%- assign legal_menu = section.settings.legal_menu.links -%}
+        <ul >    
+          {%- for link in legal_menu -%}
+            <li>{{ link.title | link_to: link.url }}</li>
+          {%- endfor -%}    
         </ul>
       </div>
       <div class="p-social-links">
-      <a href="">{{'FB.svg' | inline_asset_content}}</a>
-      <a href="">{{'IG.svg' | inline_asset_content}}</a>
-      <a href="">{{'Tiktok.svg' | inline_asset_content}}</a>
-      <a href="">{{'Youtube.svg' | inline_asset_content}}</a>
-      <a href="">{{'X.svg' | inline_asset_content}}</a>
+        {% if section.settings.instagram %}
+          <a href="">{{'IG.svg' | inline_asset_content}}</a>
+        {% endif %}
+        {% if section.settings.facebook %}
+          <a href="">{{'FB.svg' | inline_asset_content}}</a>
+        {% endif %}
+        {% if section.settings.tiktok %}
+          <a href="">{{'Tiktok.svg' | inline_asset_content}}</a>
+        {% endif %}
+        {% if section.settings.youtube %}
+          <a href="">{{'Youtube.svg' | inline_asset_content}}</a>
+        {% endif %}
+        {% if section.settings.twitter %}
+          <a href="">{{'X.svg' | inline_asset_content}}</a>
+        {% endif %}
     </div>
   </div>
   
@@ -118,7 +140,7 @@
       margin-top: 8.625rem ;
       width: 100%;
       margin-top: 4.688rem ;
-      svg{
+      img{
         width:100%; 
         height: auto;    
       }
@@ -241,13 +263,86 @@
 {% schema %}
  {
  "name": "pango footer",
- "settings": [],
- "presets": [
-   {
-     "name": "pango footer",
-     "category": "All Pango"
-   }
- ]
+  "settings": [
+  {
+    "type": "link_list",
+    "id": "legal_menu",
+    "label": "Legal menu"
+  },
+  {
+    "type": "url",
+    "id": "instagram",
+    "label": "Instagram"
+  },
+  {
+    "type": "url",
+    "id": "facebook",
+    "label": "Facebook"
+  },
+  {
+    "type": "url",
+    "id": "youtube",
+    "label": "YouTube"
+  },
+  {
+    "type": "url",
+    "id": "twitter",
+    "label": "Twitter"
+  },
+  {
+    "type": "url",
+    "id": "tiktok",
+    "label": "TikTok"
+  }
+  ],
+  "blocks": [
+    {
+      "name": "newsletter text",
+      "type": "newsletter_text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "title",
+          "default": "YOU ARE INVITED to discover our world"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "description",
+          "default": "<p> Receive intimate access to our perfumers’ craft and the inspirations that shape each fragrance.</p>"
+        }
+      ]
+    },
+    {
+      "name": "logo",
+      "type": "logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "label": "Image Picker 0",
+          "id": "image_picker_0"
+        }
+      ]
+    },
+    {
+      "name": "Footer menu",
+      "type": "footer_menu",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "footer_menu",
+          "label": "Footer menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "pango footer",
+      "category": "All Pango"
+    }
+  ]
 } 
 {% endschema %}
 

@@ -13,8 +13,41 @@
   "sections": {
     "pango_footer_PKFBcp": {
       "type": "pango-footer",
+      "blocks": {
+        "newsletter_text_eETQjH": {
+          "type": "newsletter_text",
+          "settings": {
+            "title": "YOU ARE INVITED to discover our world",
+            "description": "<p> Receive intimate access to our perfumers’ craft and the inspirations that shape each fragrance.</p>"
+          }
+        },
+        "logo_Y9cyzN": {
+          "type": "logo",
+          "settings": {
+            "image_picker_0": "shopify://shop_images/logo-white.svg"
+          }
+        },
+        "footer_menu_gawWCH": {
+          "type": "footer_menu",
+          "settings": {
+            "footer_menu": "otz-footer-menu"
+          }
+        }
+      },
+      "block_order": [
+        "newsletter_text_eETQjH",
+        "logo_Y9cyzN",
+        "footer_menu_gawWCH"
+      ],
       "name": "pango footer",
-      "settings": {}
+      "settings": {
+        "legal_menu": "otz-policies-menu",
+        "instagram": "",
+        "facebook": "",
+        "youtube": "",
+        "twitter": "",
+        "tiktok": ""
+      }
     }
   },
   "order": [

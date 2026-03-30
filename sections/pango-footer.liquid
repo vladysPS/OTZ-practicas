@@ -1,8 +1,4 @@
 <!-- pango-footer.liquid -->
-{%- assign legal_menu = section.settings.legal_menu.links -%}
-{%- for link in legal_menu -%}
-  {{ link.title | link_to: link.url }}
-{%- endfor -%}
 
 <footer class="p-{{ section.id }}">
  <div class="p-footer-container page-width">
@@ -40,9 +36,9 @@
         {{ image_picker_0 | image_url: width: image_picker_0.width | image_tag: class: 'add_your_class_here', loading: 'lazy' }}
     </div>
   {%- when 'footer_menu' -%}
-      {%- assign footer_menu = block.settings.footer_menu.links -%}
-        <div class="p-footer-menu-container">
+      <div class="p-footer-menu-container">
         <ul class="alpina-typewriter">
+            {%- assign in footer_menu = block.settings.footer_menu.links -%}
             {%- for link in footer_menu -%}
               <li>{{ link.title | link_to: link.url }}</li>              
             {%- endfor -%}
@@ -56,8 +52,8 @@
     
       <div class="copyright"><span>© OTZLAB.</span> All rights reserved.</div>
       <div class="p-legal-links">
-        {%- assign legal_menu = section.settings.legal_menu.links -%}
         <ul >    
+          {%- assign legal_menu = section.settings.legal_menu.links -%}
           {%- for link in legal_menu -%}
             <li>{{ link.title | link_to: link.url }}</li>
           {%- endfor -%}    
@@ -104,11 +100,8 @@
       align-items:center;
       h4{
         font-size: 1.5rem;
-        text-transform: uppercase;
         margin:0;
-        span{
-          text-transform: lowercase;
-        }
+        width: 182px;
 
       }
       p{
@@ -155,6 +148,11 @@
          gap: 20px;
          margin:0;
          padding:20px 0;
+         li{
+            a{
+              color: white;
+            }
+         }
 
       }
     }
@@ -172,9 +170,12 @@
             justify-content: space-between;
             font-size: 0.62rem;
             li{
-              text-decoration: underline;
-              text-decoration-thickness: 1px;
-              text-underline-offset: 1.5px;
+              a{
+                color: white;                
+                text-decoration: underline;
+                text-decoration-thickness: 1px;
+                text-underline-offset: 1.5px;
+              }
             }
           }  
         }
@@ -197,10 +198,11 @@
   @media(min-width:768px){
     .p-footer-container{
      
-      padding: 1.25rem 2.43rem;
+      padding: 7.5rem 2.43rem 1.25rem ;
       .p-top-cont{
         h4{
           font-size: 3.5rem;
+          width: 434px;
         }
         p{
           font-size: 1rem;
@@ -221,7 +223,7 @@
         ul{
           flex-direction: row;
           justify-content: center;
-          gap: 40px;
+          gap: 50px;
           padding:43px 22px;
         }
       }
@@ -241,9 +243,10 @@
               gap:40px;
             }  
           }
-          .copyright{
-            font-size: 0.75rem;
-          }        
+          .p-social-links{
+            min-width: 170px;
+            justify-content: end;
+          }
         
       }
     }

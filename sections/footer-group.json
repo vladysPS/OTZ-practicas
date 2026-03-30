@@ -42,8 +42,8 @@
       "name": "pango footer",
       "settings": {
         "legal_menu": "otz-policies-menu",
-        "instagram": "",
-        "facebook": "",
+        "instagram": "/instagram",
+        "facebook": "/facebook",
         "youtube": "",
         "twitter": "",
         "tiktok": ""

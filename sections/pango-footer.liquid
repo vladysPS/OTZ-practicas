@@ -3,7 +3,7 @@
 
 <footer class="p-{{ section.id }}">
  <div class="p-footer-container page-width">
-  <div class="p-top div p-red">
+  <div class="p-top-cont">
     <h4 class="alpina-thin">
       You are invited <br> <span>to discover our world</span>
     </h4>
@@ -30,30 +30,33 @@
     {% endform %}
     </div>
   </div>
-
-  <div class="logo-container p-pink">
-    logo here OTZLAB
+  <div class="logo-container">
+    {{ 'logo-white.svg' | inline_asset_content }}
   </div>
-  <div class="p-footer-menu-container p-green">
-    <li>FAQ</li>
-    <li>DELIVERY AND RETURNS</li>
-    <li>CONTACT US</li>
-    <li>CONUTRY REGION</li>
+  <div class="p-footer-menu-container">
+    <ul class="alpina-typewriter">
+      <li>FAQ</li>
+      <li>DELIVERY AND RETURNS</li>
+      <li>CONTACT US</li>
+      <li>CONUTRY REGION</li>
+    </ul>
   </div>
-
-  <div class="p-bottom-container p-blue" >
-    <div>OTZLAB. All rights reserved.</div>
-    <div class="p-legal-links">
-      <li>Privacy Policy</li>
-      <li>Terms of service</li>
-      <li>Cookie settings</li>
-    </div>
-    <div class="p-social-links">
-      <a href="">facebook</a>
-      <a href="">twitter</a>
-      <a href="">instagram</a>
-      <a href="">tiktok</a>
-      <a href="">youtube</a>
+  <div class="p-bottom-container" >
+    
+      <div class="copyright"><span>© OTZLAB.</span> All rights reserved.</div>
+      <div class="p-legal-links">
+        <ul >        
+          <li>Privacy Policy</li>
+          <li>Terms of service</li>
+          <li>Cookie settings</li>
+        </ul>
+      </div>
+      <div class="p-social-links">
+      <a href="">{{'FB.svg' | inline_asset_content}}</a>
+      <a href="">{{'IG.svg' | inline_asset_content}}</a>
+      <a href="">{{'Tiktok.svg' | inline_asset_content}}</a>
+      <a href="">{{'Youtube.svg' | inline_asset_content}}</a>
+      <a href="">{{'X.svg' | inline_asset_content}}</a>
     </div>
   </div>
   
@@ -66,19 +69,165 @@
 {%  # CSS  %}
 <style>
 .p-{{ section.id }}{
-.p-footer-container{
-  text-align:center;
-}
+  background:black;
+  color:white;
+
+
+  .p-footer-container{
+    text-align:center;
+    padding: 4.2rem 1rem 1.87rem;
+    .p-top-cont{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      h4{
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        margin:0;
+        span{
+          text-transform: lowercase;
+        }
+
+      }
+      p{
+        font-size: 0.625rem;
+        max-width: 14.31rem;
+        margin:1.25rem 0;
+      }
+      .p-email-container{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom:1px solid white;
+        min-width: 14rem;
+        input,
+        button{
+          all:unset;
+        }
+
+        input{
+          text-align: left;
+          padding-left: 10px;
+          font-size:0.62rem;
+        }
+
+      }
+    }
+    .logo-container{
+      margin-top: 8.625rem ;
+      width: 100%;
+      margin-top: 4.688rem ;
+      svg{
+        width:100%; 
+        height: auto;    
+      }
+    }
+    .p-footer-menu-container{
+      border-bottom: 1px solid white;
+      ul{
+         list-style: none;
+         font-size:12px;
+         display: flex;
+         flex-direction: column;
+         gap: 20px;
+         margin:0;
+         padding:20px 0;
+
+      }
+    }
+    .p-bottom-container{
+      margin-top: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap:1.25rem;
+        .p-legal-links{
+          ul{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.62rem;
+            li{
+              text-decoration: underline;
+              text-decoration-thickness: 1px;
+              text-underline-offset: 1.5px;
+            }
+          }  
+        }
+        .copyright{
+          font-size: 0.62rem;
+          span{
+            font-weight: 700;
+          }
+        }
+        .p-social-links{
+          display: flex;
+          gap:1.5rem;
+          justify-content: center;
+          a{
+            color: white;
+          }
+        }
+    }
+  }
+  @media(min-width:768px){
+    .p-footer-container{
+     
+      padding: 1.25rem 2.43rem;
+      .p-top-cont{
+        h4{
+          font-size: 3.5rem;
+        }
+        p{
+          font-size: 1rem;
+          max-width: 35.12rem;
+        }
+        .p-email-container{
+          min-width: 31rem;
+          input{
+            font-size:0.75rem;
+          }
+        }
+      
+      }
+      .logo-container{
+        margin-top: 8.625rem ;
+      }
+      .p-footer-menu-container{
+        ul{
+          flex-direction: row;
+          justify-content: center;
+          gap: 40px;
+          padding:43px 22px;
+        }
+      }
+      .p-bottom-container{
+        margin-top: 1.37rem;
+        flex-direction: row;
+        justify-content: space-between;
+          .p-legal-links{
+            
+            ul{
+              list-style: none;
+              margin: 0;
+              padding: 0;
+              display: flex;
+              justify-content: space-between;
+              font-size: 0.75rem;
+              gap:40px;
+            }  
+          }
+          .copyright{
+            font-size: 0.75rem;
+          }        
+        
+      }
+    }
+  }
 
 }
-
-
-@media(min-width:768px){
- .p-{{ section.id }}{
-  
- }
-}
-
 
 </style>
 

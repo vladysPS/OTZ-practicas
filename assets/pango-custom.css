@@ -3,9 +3,11 @@
 
 .alpina-typewriter{
   font-family: Alpina-Typewriter;
+  font-weight:300;
 }
 .alpina-thin{
   font-family: Alpina-Thin;
+  font-weight: 250;
 }
 
 :root {

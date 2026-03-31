@@ -1,0 +1,92 @@
+<section class="p-{{ p.section.id }}">
+    <div class="inner-container">
+        <div class="image-container">
+            {%- assign image = section.settings.image -%}
+            {{ image | image_url: width: image.width |image_tag }}
+        </div>
+        <div class="video-container">
+            {%- assign video = section.settings.video -%}
+            {{ video | video_tag: autoplay: true, loop: true, muted: true, controls: false }}
+        </div>
+    </div>
+</section>
+
+<style>
+    .p-{{ p.section.id }}{
+        .inner-container{
+            .image-container,
+            .video-container{
+
+            }
+            .image-container{
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    aspect-ratio: 1 / 1;
+                }
+            }
+            .video-container{
+                video{
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    aspect-ratio: 1 / 1;
+                }
+            }
+        }
+        @media (min-width: 768px){
+            .inner-container{
+                display: flex;
+                flex-direction: row{% if section.settings.media_direction == "photo_right" %}-reverse{% endif %};
+                .image-container{
+                    height: 95vh;
+                    width: 50%;
+                }
+                .video-container{
+                    height: 95vh;
+                    width: 50%;
+                }
+            }
+        }
+    }
+</style>
+
+{% schema %}
+  {
+  "name": "Pango Banner",
+  "settings": [
+    {
+      "type": "select",
+      "id": "media_direction",
+      "label": "Media direction",
+      "options": [
+        {
+          "value": "photo_left",
+          "label": "Photo left"
+        },
+        {
+          "value": "photo_right",
+          "label": "Photo right"
+        }
+      ],
+      "default": "photo_left"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+{
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pango Banner"
+    }
+  ]
+}  
+{% endschema %}

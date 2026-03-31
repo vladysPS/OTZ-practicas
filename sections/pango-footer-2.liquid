@@ -1,0 +1,337 @@
+<footer class="p-{{ section.id }}">
+    <div class="footer-container">
+        {%- for block in section.blocks -%}
+            {%- case block.type -%}
+            {%- when 'newsletter' -%}
+                <div class="newsletter-container">
+                    <h3 class="alpina-thin">{{ block.settings.title }} </h3>
+                    {{ block.settings.description }} 
+                    {% form 'customer' %}
+
+                    <div class="p-email-container">
+                        <input class="p-email-input" type="email" name="contact[email]" autocomplete="email" placeholder="{{ 'pango.newsletter.label' | t }}" required/>
+                        
+                        <button type="submit" class="p-submit-button" name="commit" id="Subscribe" aria-label="{{ 'newsletter.button' | t }}">
+                            {{ 'icon-arrow.svg' | inline_asset_content }}
+                        </button>
+                    </div>
+                    {%- if form.errors -%}
+                        <small class="newsletter-form__message form__message" id="ContactFooter-error">{% render 'icon-error' %}{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}</small>
+                    {%- endif -%}
+                    {%- if form.posted_successfully? -%}
+                        <div class="newsletter-form__message newsletter-form__message--success form__message" id="ContactFooter-success" tabindex="-1" autofocus>{{ 'newsletter.success' | t }}</div>
+                    {%- endif -%}   
+
+                    {% endform %}
+                </div>
+            {%- when 'logo' -%}
+                <div class="logo-container">
+                    {%- assign logo_image = block.settings.logo_image -%}
+                    {{ logo_image | image_url: width: logo_image.width | image_tag: class: 'add_your_class_here', loading: 'lazy' }}
+                </div>
+            {%- when 'footer_menu' -%}
+                <div class="footer-menu-container">
+                {%- assign footer_menu_picker = block.settings.footer_menu_picker.links -%}
+                    <ul class="alpina-typewriter" >
+                    {%- for link in footer_menu_picker -%}
+                        <li>{{ link.title | link_to: link.url }}</li>
+                    {%- endfor -%}
+                    </ul>
+                </div>
+
+            {% endcase %} 
+        {%- endfor -%}            
+        <div class="bottom-container">
+            <div class="policies-links">
+                {%- assign policies_menu = section.settings.policies_menu.links -%}
+                <ul>
+                {%- for link in policies_menu -%}
+                    <li>{{ link.title | link_to: link.url }}</li>
+                {%- endfor -%}
+                </ul>
+            </div>
+            <div class="copyright">
+                 {{ section.settings.copyright_text }}
+             </div>
+            <div class="social-links">
+                {% if section.settings.instagram %}
+                    <a href="{{ section.settings.instagram }}">{{'IG.svg' | inline_asset_content}}</a>
+                {% endif %}
+                {% if section.settings.facebook %}
+                    <a href="{{ section.settings.facebook }}">{{'FB.svg' | inline_asset_content}}</a>
+                {% endif %}
+                {% if section.settings.tiktok %}
+                    <a href="{{ section.settings.tiktok }}">{{'Tiktok.svg' | inline_asset_content}}</a>
+                {% endif %}
+                {% if section.settings.youtube %}
+                    <a href="{{ section.settings.youtube }}">{{'Youtube.svg' | inline_asset_content}}</a>
+                {% endif %}
+                {% if section.settings.x %}
+                    <a href="{{ section.settings.x }}">{{'X.svg' | inline_asset_content}}</a>
+                {% endif %}
+             </div>
+
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<style>
+.p-{{ section.id }}{
+    background:black;
+    color:white;
+    .footer-container{
+        padding:4.2rem 1rem 1.8rem;
+        text-align: center;
+        .newsletter-container{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            h3{
+                max-width: 182px;
+                font-size: 24px;
+                margin:0;
+                line-height: 1;
+            }
+            p{
+                font-size: 10px;
+                max-width: 245px;
+                margin:20px 0;
+                line-height: 1.2;
+            }
+            .p-email-container{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 224px;
+                border-bottom:1px solid white;
+                input{
+                    all:unset;
+                    text-align: left;
+                    padding-left:5px;
+                    font-size: 10px;
+                }
+                input::placeholder{
+                    color:white;
+                    opacity:1;
+                }
+                button{
+                    all:unset;
+                    cursor: pointer;
+                }
+            }
+        }
+        .logo-container{
+            margin-top:75px;
+        }
+        .footer-menu-container{
+            width: 100%;
+            padding: 20px 0;
+            border-bottom: 1px solid white;
+            display: flex;
+            justify-content: center;
+            ul{
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+                li{
+                    a{
+                        color:white;
+                        font-size: 12px;
+                    }
+                }
+            }
+        }
+        .bottom-container{
+            width: 100%;
+            .policies-links{
+                margin: 20px 0;
+                ul{
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    display: flex;
+                    justify-content: center;
+                    gap: 10px;
+                    li{
+                        a{
+                            color:white;
+                            font-size: 10px;
+                            text-decoration: underline;
+                            text-decoration-thickness: 1px;
+                            text-underline-offset: 1.5px;
+                        }
+                    }
+                }
+            }
+            .copyright{
+                font-size: 10px;
+                margin: 0;
+            }
+            .social-links{
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+                margin-top:20px;
+            }
+        }
+    }    
+    @media (min-width:768px){
+        .footer-container{
+            padding:8.75rem 2.4rem 1.25rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            .newsletter-container{
+                h3{
+                    max-width: 424px;
+                    font-size: 56px;
+                }
+                p{
+                    font-size: 16px;
+                    max-width: 562px;
+                    margin:28px 0;
+                }
+                .p-email-container{
+                    width:498px;
+                    input{
+                        font-size: 12px;
+                    }
+                }                
+            } 
+            .logo-container{
+                margin-top:138px;
+            }
+            .footer-menu-container{
+                padding: 43px 0 22px;
+                ul{
+                    flex-direction: row;
+                    gap: 50px;
+                }
+            }
+            .bottom-container{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                .policies-links{
+                    order:2;
+                    margin: 22px 0 5px 0;
+                    ul{
+                        margin:  0;
+                        li{
+                            a{
+                                font-size: 12px;
+                            }
+                        }
+                    }
+                }  
+                .copyright{
+                    font-size: 12px;
+                    order:1;
+                }    
+                .social-links{
+                    margin-top: 0;
+                    width: 170px;
+                    display: flex;
+                    justify-content: flex-end;
+                    order:3;
+                }                      
+            }
+    }
+}
+</style>
+{% schema %}
+  {
+  "name": "Pango footer 2",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "copyright_text",
+      "label": "Copyright text",
+      "info": "© OTZLAB.All rights reserved."
+    },
+    {
+      "type": "link_list",
+      "id": "policies_menu",
+      "label": "Policies menu"
+    },
+    {
+      "type": "url",
+      "id": "facebook",
+      "label": "Facebook"
+    },
+    {
+      "type": "url",
+      "id": "x",
+      "label": "X"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Instagram"
+    },
+    {
+      "type": "url",
+      "id": "tiktok",
+      "label": "TikTok"
+    },
+    {
+      "type": "url",
+      "id": "youtube",
+      "label": "YouTube"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Newsletter",
+      "type": "newsletter",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "YOU ARE INVITED to discover our world"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Desciption",
+          "default": "<p>Receive intimate access to our perfumers’ craft and the inspirations that shape each fragrance.</p>"
+        }
+      ]
+    },
+    {
+      "name": "Logo",
+      "type": "logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "logo_image",
+          "label": "Logo image"
+        }
+      ]
+    },
+    {
+      "name": "Footer menu",
+      "type": "footer_menu",
+      "settings": [
+        {
+          "type": "link_list",
+          "id": "footer_menu_picker",
+          "label": "Footer menu picker"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pango footer 2"
+    }
+  ]
+}  
+{% endschema %}

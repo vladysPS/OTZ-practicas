@@ -10,7 +10,8 @@
 {
   "pango":{
     "newsletter":{
-      "label":"E-mail"
+      "label":"E-mail",
+      "button": "arrow icon"
     }
   },
   "accessibility": {

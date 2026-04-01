@@ -1,15 +1,3 @@
-@font-face { font-family: Alpina-Thin; src: url('https://cdn.shopify.com/s/files/1/0946/9024/7043/files/GT-Alpina-Condensed-Thin.otf?v=1765281403'); }
-@font-face { font-family: Alpina-Typewriter; src: url('https://cdn.shopify.com/s/files/1/0946/9024/7043/files/GT-Alpina-Typewriter-Light.ttf?v=1765281425'); }
-
-.alpina-typewriter{
-  font-family: Alpina-Typewriter;
-  font-weight:300;
-}
-.alpina-thin{
-  font-family: Alpina-Thin;
-  font-weight: 250;
-}
-
 :root {
   --vid-1-w: 324px;
   --vid-1-h: 431px;
@@ -48,6 +36,65 @@
 .p-green{
   border: 1px solid green;
 }
+/* ––––––––––––––––––––––––––––––––––––––––––––––––---------––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+/* –––––––––––––––––––––––––––––––––––––––––––––––– FONTS ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+@font-face { font-family: Alpina-Thin; src: url('https://cdn.shopify.com/s/files/1/0946/9024/7043/files/GT-Alpina-Condensed-Thin.otf?v=1765281403'); }
+@font-face { font-family: Alpina-Typewriter; src: url('https://cdn.shopify.com/s/files/1/0946/9024/7043/files/GT-Alpina-Typewriter-Light.ttf?v=1765281425'); }
+
+.alpina-typewriter{
+  font-family: Alpina-Typewriter;
+  font-weight:300;
+}
+.alpina-thin{
+  font-family: Alpina-Thin;
+  font-weight: 250;
+}
+/* ––––––––––––––––––––––––––––––––––––––––––––––––---------––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+/* –––––––––––––––––––––––––––––––––––––––––––––––– BUTTONS ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
+
+.main-button-black{
+  display: flex;
+  width:280px;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  color:black;
+  border: 1px solid black;
+
+  font-family: "GT Alpina Typewriter";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 120%; 
+  text-transform: uppercase;
+}
+.main-button-white{
+  display: flex;
+  width:280px;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
+  align-self: stretch;
+  color:white;
+  border: 1px solid white;
+
+  font-family: "GT Alpina Typewriter";
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 120%; 
+  text-transform: uppercase;
+}
+
+@media (min-width:768px){
+  .main-button-black{
+      width: 310px;
+  }
+  .main-button-white{
+      width: 310px;
+  }
+}
 
 /* ––––––––––––––––––––––––––––––––––––––––––––––––---------––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
 /* –––––––––––––––––––––––––––––––––––––––––––––––– HEADER ––––––––––––––––––––––––––––––––––––––––––––––––––––––––––*/
@@ -72,6 +119,9 @@ header.dark-mode{
 
 }
 header{
+  .header__row{
+    display: block;
+  }
   li{
     a{
       span{
@@ -88,7 +138,7 @@ header{
   }
   .header__columns{
     --header-template-columns: 1fr 25px 110px 25px;
-    padding: 16px 24px;
+    padding: 18px 24px;
     grid-template-areas: 'center leftB rightB rightA';
   }
   /* Icons adjustments */
@@ -157,6 +207,7 @@ header{
     .header__columns{
       --header-template-columns: var(--header-left) var(--header-center) var(--header-right);
       grid-template-areas: 'left center right';  
+      padding: 15px 43px;
     }
   /* Icons adjustments */
   search-button{

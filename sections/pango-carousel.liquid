@@ -1,0 +1,157 @@
+<!-- pango-carousel.liquid -->
+{%- assign carousel_collection_products = section.settings.carousel_collection.products -%}
+
+<section class="p-{{ section.id }}">
+    <div class="p-inner-cont">
+        <div class="title">
+            <span>{{ section.settings.text_top }} </span>
+            <h2>{{ section.settings.title }} </h2>
+        </div>
+        <div class="carousel-container">
+            <div class="swiper mySwiper-carousel">
+                <div class="swiper-wrapper">
+                {%- for product in carousel_collection_products -%}
+                    <div class="swiper-slide">
+                        {{ product.metafields.custom.carousel_image.value |  image_url: width:image.width  |image_tag }}
+                        <div class="prod-data" style="display:none;">
+                            <h3 class="prod-title">{{ product.title }}</h3>
+                            <p class="prod-price">{{ product.price | money }}</p>
+                            <a href="{{ product.url }}" class="prod-link"></a>
+                        </div>
+                    </div>                    
+                {%- endfor -%}
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+        <div class="product-info">
+            <h3 class="product-title">LANCES</h3>
+            <p class="product-price">$250</p>
+            <a href="/" class="main-button-black product-link">shop now</a>
+        </div>
+    </div>
+</section>
+
+<style>
+.p-{{ section.id }}{
+    .p-inner-cont{
+        background-color: transparent;
+        text-align:center;
+        .carousel-container{
+            .swiper {
+                width: 100%;
+                height: 100%;
+                .swiper-slide {
+                    text-align: center;
+                    font-size: 18px;
+                    background: #444;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    
+                    img {
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        filter: blur(3px);
+                        transform: scale(1.1);
+                    }
+                }
+                .swiper-slide-active{
+                    img {
+                        filter: blur(0);
+                        transform: scale(1.2);
+                        transition: filter 0.5s ease, transform 0.5s ease;
+                    }
+                }
+            }
+        }
+    }
+    @media (min-width: 768px){
+        .p-inner-cont{
+            background-color: transparent;
+        }
+    }
+}
+</style>
+
+<script>
+    let swiper = new Swiper(".p-{{ section.id }} .mySwiper-carousel", {
+    slidesPerView: 2,          // Show 3 slides at once
+    spaceBetween: 9,          // Optional: gap between slides
+    centeredSlides: true,      // Keeps the active slide in the middle
+    loop: true,  
+    breakpoints: {
+        768: {
+            slidesPerView: 3,    // Show 3 slides on desktop
+            spaceBetween: 30,   // Optional: gap between slides
+        },
+    },  
+    pagination: {
+        el: ".swiper-pagination",
+    },
+    on:{
+        init: function(){
+            updateProductInfo(this);
+        },
+        slideChange: function(){
+            updateProductInfo(this);
+        }
+    }
+    });
+
+
+function updateProductInfo(swiper) {
+  // Get real active slide (important with loop:true)
+  const activeSlide = swiper.slides[swiper.activeIndex];
+
+  if (!activeSlide) return;
+
+  const prodData = activeSlide.querySelector(".prod-data");
+  if (!prodData) return;
+
+  const title = prodData.querySelector(".prod-title")?.innerText || "";
+  const price = prodData.querySelector(".prod-price")?.innerText || "";
+  const link = prodData.querySelector(".prod-link")?.getAttribute("href") || "";
+
+  // Inject into main product info block
+  const container = document.querySelector(".p-{{ section.id }} .product-info");
+
+  container.querySelector(".product-title").innerText = title;
+  container.querySelector(".product-price").innerText = price;
+  container.querySelector(".product-link").setAttribute("href", link);
+}
+</script>
+
+{% schema %}
+  {
+  "name": "Pango Carousel",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "carousel_collection",
+      "label": "Carousel collection"
+    },
+        {
+      "type": "text",
+      "id": "text_top",
+      "label": "Text top",
+      "default": "EXPLORE"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "OUR FRAGRANCES"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pango Carousel",
+      "category": "All Pango"
+    }
+  ]
+}  
+{% endschema %}

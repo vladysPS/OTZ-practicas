@@ -33,6 +33,7 @@
     },
     "pango_typewriter_pFBLKd": {
       "type": "pango-typewriter",
+      "disabled": true,
       "name": "Pango Typewriter",
       "settings": {
         "paragraph": "<p>We transform sensations into passions, encapsulating the purest and deepest essence of our roots in perfumes.</p>",

@@ -3,9 +3,9 @@
 
 <section class="p-{{ section.id }}">
     <div class="p-inner-cont">
-        <div class="title">
-            <span>{{ section.settings.text_top }} </span>
-            <h2>{{ section.settings.title }} </h2>
+        <div class="title-container">
+            <span class="alpina-thin">{{ section.settings.text_top }} </span>
+            <h2 class="alpina-thin">{{ section.settings.title }} </h2>
         </div>
         <div class="carousel-container">
             <div class="swiper mySwiper-carousel">
@@ -21,14 +21,19 @@
                     </div>                    
                 {%- endfor -%}
                 </div>
-                <div class="swiper-pagination"></div>
+                <div>
+                </div>
+                
             </div>
-
+            
         </div>
-        <div class="product-info">
-            <h3 class="product-title">LANCES</h3>
+        <div class="product-info-container">
+            <h3 class="product-title alpina-thin">LANCES</h3>
             <p class="product-price">$250</p>
-            <a href="/" class="main-button-black product-link">shop now</a>
+            <div>
+                <a href="/" class="main-button-black product-link">shop now</a>
+            </div>
+            <div class="swiper-pagination"></div>
         </div>
     </div>
 </section>
@@ -36,8 +41,17 @@
 <style>
 .p-{{ section.id }}{
     .p-inner-cont{
-        background-color: transparent;
         text-align:center;
+        padding: 69px 0;
+        .title-container{
+            span{
+                font-size:12px;
+            }
+            h2{
+                margin: 10px 0 0 0;
+                font-size: 40px;
+            }
+        }
         .carousel-container{
             .swiper {
                 width: 100%;
@@ -49,6 +63,7 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
+                    height: 300px;
                     
                     img {
                         display: block;
@@ -68,10 +83,64 @@
                 }
             }
         }
+        .product-info-container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-top:18px;    
+            h3{
+                margin: 0;
+                font-size: 24px;
+            }
+            p{
+                margin:8px 0 18px 0;
+                font-size: 10px;
+            }
+            .swiper-pagination{
+                position:static;
+                .swiper-pagination-bullet{
+                    margin:30px 0 0 0;
+                    border-radius: 0;
+                    width: 30px;
+                    height: 1px;
+                }
+                .swiper-pagination-bullet-active{
+                    background-color: #000;
+                }
+            }
+        }
+
     }
-    @media (min-width: 768px){
+
+    @media (min-width: 1000px){
         .p-inner-cont{
-            background-color: transparent;
+            padding: 60px;
+            .carousel-container{
+                .swiper {
+                    .swiper-slide {
+
+                        height: 400px;
+                        
+
+                    }
+                    .swiper-slide-active{
+                        img {
+                            filter: blur(0);
+                            transform: scale(1.2);
+                            transition: filter 0.5s ease, transform 0.5s ease;
+                        }
+                    }
+                }
+            }
+            .product-info-container{
+                .swiper-pagination{
+                    .swiper-pagination-bullet{
+                        margin:64px 0 0 0;
+                        width: 60px;
+                    }
+                }
+            }
         }
     }
 }
@@ -79,15 +148,15 @@
 
 <script>
     let swiper = new Swiper(".p-{{ section.id }} .mySwiper-carousel", {
-    slidesPerView: 2,          // Show 3 slides at once
-    spaceBetween: 9,          // Optional: gap between slides
-    centeredSlides: true,      // Keeps the active slide in the middle
-    loop: true,  
+    initialSlide: 1,
+    slidesPerView: 2,          
+    spaceBetween: 68,          
+    centeredSlides: true,        
     breakpoints: {
         768: {
-            slidesPerView: 3,    // Show 3 slides on desktop
-            spaceBetween: 30,   // Optional: gap between slides
-        },
+            slidesPerView: 3,    
+            spaceBetween: 50, 
+        } 
     },  
     pagination: {
         el: ".swiper-pagination",
@@ -103,26 +172,37 @@
     });
 
 
-function updateProductInfo(swiper) {
-  // Get real active slide (important with loop:true)
-  const activeSlide = swiper.slides[swiper.activeIndex];
+    function updateProductInfo(swiperInstance) {
+    // 1. Get the container safely
+    const sectionContainer = document.querySelector(".p-{{ section.id }}");
+    if (!sectionContainer) return;
 
-  if (!activeSlide) return;
+    const infoContainer = sectionContainer.querySelector(".product-info-container");
+    if (!infoContainer) return;
 
-  const prodData = activeSlide.querySelector(".prod-data");
-  if (!prodData) return;
+    // 2. Get the active slide. 
+    // In loop mode, it's safer to use the slide at the current index
+    const activeSlide = swiperInstance.slides[swiperInstance.activeIndex];
+    if (!activeSlide) return;
 
-  const title = prodData.querySelector(".prod-title")?.innerText || "";
-  const price = prodData.querySelector(".prod-price")?.innerText || "";
-  const link = prodData.querySelector(".prod-link")?.getAttribute("href") || "";
+    // 3. Find the data inside the slide
+    const prodData = activeSlide.querySelector(".prod-data");
+    if (!prodData) return;
 
-  // Inject into main product info block
-  const container = document.querySelector(".p-{{ section.id }} .product-info");
+    // 4. Extract data with fallback values
+    const title = prodData.querySelector(".prod-title")?.textContent || "";
+    const price = prodData.querySelector(".prod-price")?.textContent || "";
+    const link = prodData.querySelector(".prod-link")?.getAttribute("href") || "#";
 
-  container.querySelector(".product-title").innerText = title;
-  container.querySelector(".product-price").innerText = price;
-  container.querySelector(".product-link").setAttribute("href", link);
-}
+    // 5. Update the UI safely
+    const uiTitle = infoContainer.querySelector(".product-title");
+    const uiPrice = infoContainer.querySelector(".product-price");
+    const uiLink = infoContainer.querySelector(".product-link");
+
+    if (uiTitle) uiTitle.textContent = title;
+    if (uiPrice) uiPrice.textContent = price;
+    if (uiLink) uiLink.setAttribute("href", link);
+    }
 </script>
 
 {% schema %}

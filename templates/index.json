@@ -41,11 +41,21 @@
         "padding_top-bottom_mobile": 120,
         "padding_top-bottom_desktop": 114
       }
+    },
+    "pango_carousel_3K78Hw": {
+      "type": "pango-carousel",
+      "name": "Pango Carousel",
+      "settings": {
+        "carousel_collection": "otz-all-products",
+        "text_top": "EXPLORE",
+        "title": "OUR FRAGRANCES"
+      }
     }
   },
   "order": [
     "pango_otz_scroll_KFq4iw",
     "pango_banner_atL43A",
-    "pango_typewriter_pFBLKd"
+    "pango_typewriter_pFBLKd",
+    "pango_carousel_3K78Hw"
   ]
 }

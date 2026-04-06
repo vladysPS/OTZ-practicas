@@ -1,15 +1,18 @@
 <!-- pango-essence-module.liquid -->
-<section class="s-{{section.id}}">
+<section class="p-{{ section.id }}">
     <div class="essence-mod-wrapper">
         {%- for block in section.blocks -%}
         {%- case block.type -%}
-            <div class="essence-text-container">
-                <h2 class="essence-title alpina-thin">{{ block.settings.title }}</h2>
-                <div class="essence-image-container">
-                    {{ block.settings.essence_image | image_url: width: 500 | image_tag }}
-                </div>
-                <a href="{{ block.settings.button_link }}" class="main-button-black essence-button">{{ block.settings.button_text }}</a>
+        {%- when 'essence_text' -%}
+        <div class="essence-text-container">
+            <h2 class="essence-title alpina-thin">{{ block.settings.title }}</h2>
+            <div class="essence-image-container">
+                {{ block.settings.essence_image | image_url: width: 500 | image_tag }}
             </div>
+            <div>
+                <a href="{{ block.settings.button_link }}" class="main-button-black main-button-white">{{ block.settings.button_text }}</a>
+            </div>
+        </div>
         {%- endcase -%}
         {%- endfor -%}
         <div class="video-container">
@@ -18,6 +21,103 @@
     </div>
 </section>
 
+<style>
+    .p-{{section.id}}{
+        background:black;
+        color:white;
+        .essence-mod-wrapper{
+            display: flex;
+            flex-direction: column;
+            .essence-text-container{
+                padding: 64px 17px;
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap:58px;
+                .essence-title{
+                    margin:0;
+                    font-size: 60px;
+                }
+                .essence-image-container{
+                    width:144px;
+                    height:179px;
+                    img{
+                        display: block;
+                        max-width: 100%;
+                    }
+                }
+            }
+            .video-container{
+                min-height: 393px;
+                position: relative;
+                video{
+                    object-fit: cover;
+                    aspect-ratio: 393 / 550;
+                }
+                @media (min-width:430px){
+                    video{
+                        aspect-ratio: 393 / 450;
+                    }
+                }
+            }
+        }
+        @media (min-width:768px){
+            .essence-mod-wrapper{
+                flex-direction:row;
+                .essence-text-container,
+                .video-container{
+                    width: 50%;
+                }
+
+                .essence-text-container{
+                    padding: 47px 39px;
+                    gap:0;
+                    .essence-title{
+                        font-size: 70px;
+                        max-width: 642px;
+                    }
+                    .essence-image-container{
+                        margin: 150px 0 54px 0;
+                        width: 222px;
+                        height: 277px;
+                    }
+                }
+                .video-container{
+                    video{
+                        aspect-ratio:393/550 ;
+                    }
+                }
+
+
+            }
+        }
+        @media (min-width:1200px){
+            .essence-mod-wrapper{
+                flex-direction:row;
+                .essence-text-container,
+                .video-container{
+                    width: 50%;
+                }
+
+                .essence-text-container{
+                    padding: 47px 39px;
+                    gap:0;
+                    .essence-title{
+                        font-size: 90px;
+                        max-width: 642px;
+                    }
+                    .essence-image-container{
+                        margin: 221px 0 54px 0;
+                    }
+                }
+
+
+            }
+        }
+    }
+</style>
 
 {% schema %}
   {

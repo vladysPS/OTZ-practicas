@@ -41,6 +41,7 @@
                 .essence-title{
                     margin:0;
                     font-size: 60px;
+                    max-width: 642px;
                 }
                 .essence-image-container{
                     width:144px;
@@ -65,33 +66,18 @@
                 }
             }
         }
-        @media (min-width:768px){
+        @media (min-width:900px){
             .essence-mod-wrapper{
                 flex-direction:row;
+              
                 .essence-text-container,
                 .video-container{
                     width: 50%;
-                }
-
-                .essence-text-container{
-                    padding: 47px 39px;
-                    gap:0;
-                    .essence-title{
-                        font-size: 70px;
-                        max-width: 642px;
-                    }
-                    .essence-image-container{
-                        margin: 150px 0 54px 0;
-                        width: 222px;
-                        height: 277px;
-                    }
-                }
-                .video-container{
                     video{
-                        aspect-ratio:393/550 ;
+                        object-fit: cover;
+                        aspect-ratio: 393 / 750;
                     }
                 }
-
 
             }
         }
@@ -100,21 +86,13 @@
                 flex-direction:row;
                 .essence-text-container,
                 .video-container{
+                    max-height: 964px;
                     width: 50%;
-                }
-
-                .essence-text-container{
-                    padding: 47px 39px;
-                    gap:0;
-                    .essence-title{
-                        font-size: 90px;
-                        max-width: 642px;
-                    }
-                    .essence-image-container{
-                        margin: 221px 0 54px 0;
+                    video{
+                        object-fit: cover;
+                        aspect-ratio: 720 / 964;
                     }
                 }
-
 
             }
         }

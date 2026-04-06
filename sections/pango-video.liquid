@@ -2,7 +2,7 @@
 <section class="p-{{ section.id }}">
     <div class="video-container">
         {%- assign video = section.settings.video -%}
-        {{ video | image_url: width: video.width | image_tag: class: 'add_your_class_here', loading: 'lazy' }}
+        {{ video | video_tag: autoplay: true, loop: true, muted: true, class: 'p-vid-essence' }}
         <div class="controls-container">
             <div class="progress-bar">
 

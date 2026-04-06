@@ -76,6 +76,14 @@
       ],
       "name": "Pango Essence Module",
       "settings": {}
+    },
+    "pango_video_39EUAL": {
+      "type": "pango-video",
+      "name": "Pango video",
+      "settings": {
+        "video": "shopify://files/videos/sec-3-video.mp4",
+        "show_progress_bar": false
+      }
     }
   },
   "order": [
@@ -83,6 +91,7 @@
     "pango_banner_atL43A",
     "pango_typewriter_pFBLKd",
     "pango_carousel_3K78Hw",
-    "pango_essence_module_wxLCLe"
+    "pango_essence_module_wxLCLe",
+    "pango_video_39EUAL"
   ]
 }

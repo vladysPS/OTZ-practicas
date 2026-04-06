@@ -13,11 +13,12 @@
                 <a href="{{ block.settings.button_link }}" class="main-button-black main-button-white">{{ block.settings.button_text }}</a>
             </div>
         </div>
+        {%- when 'essence_video' -%}
+            <div class="video-container">
+                {{ block.settings.essence_video | video_tag: autoplay: true, loop: true, muted: true, class: 'p-vid-essence' }}
+            </div>
         {%- endcase -%}
         {%- endfor -%}
-        <div class="video-container">
-            {{ section.settings.essence_video | video_tag: autoplay: true, loop: true, muted: true, class: 'p-vid-essence' }}
-        </div>
     </div>
 </section>
 
@@ -123,11 +124,6 @@
   {
   "name": "Pango Essence Module",
   "settings": [
-    {
-      "type": "video",
-      "id": "essence_video",
-      "label": "Essence video"
-    }
   ],
   "blocks": [
     {
@@ -157,6 +153,17 @@
           "label": "Button link"
         }
       ]
+    },
+    {
+        "name": "Essence video",
+        "type": "essence_video",
+        "setting":[
+            {
+                "type": "video",
+                "id": "essence_video",
+                "label": "Essence video"
+            }
+        ]
     }
   ],
   "presets": [

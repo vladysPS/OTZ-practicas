@@ -51,20 +51,28 @@
         "title": "OUR FRAGRANCES"
       }
     },
-    "pango_essence_module_rVghpc": {
+    "pango_essence_module_wxLCLe": {
       "type": "pango-essence-module",
       "blocks": {
-        "essence_text_UCKq7X": {
+        "essence_text_ha8JTt": {
           "type": "essence_text",
           "settings": {
             "title": "The essence of emotion, captured in fragrance.",
+            "essence_image": "shopify://shop_images/image-essence-OTZ.png",
             "button_text": "Learn more",
             "button_link": ""
+          }
+        },
+        "essence_video_6UGG6U": {
+          "type": "essence_video",
+          "settings": {
+            "essence_video_block": "shopify://files/videos/VideoEssence-OTZ.mp4"
           }
         }
       },
       "block_order": [
-        "essence_text_UCKq7X"
+        "essence_text_ha8JTt",
+        "essence_video_6UGG6U"
       ],
       "name": "Pango Essence Module",
       "settings": {}
@@ -75,6 +83,6 @@
     "pango_banner_atL43A",
     "pango_typewriter_pFBLKd",
     "pango_carousel_3K78Hw",
-    "pango_essence_module_rVghpc"
+    "pango_essence_module_wxLCLe"
   ]
 }

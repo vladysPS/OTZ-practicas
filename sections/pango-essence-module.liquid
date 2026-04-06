@@ -15,12 +15,13 @@
         </div>
         {%- when 'essence_video' -%}
             <div class="video-container">
-                {{ block.settings.essence_video | video_tag: autoplay: true, loop: true, muted: true, class: 'p-vid-essence' }}
+                {{ block.settings.essence_video_block | video_tag: autoplay: true, loop: true, muted: true, class: 'p-vid-essence' }}
             </div>
         {%- endcase -%}
         {%- endfor -%}
     </div>
 </section>
+
 
 <style>
     .p-{{section.id}}{
@@ -157,10 +158,10 @@
     {
         "name": "Essence video",
         "type": "essence_video",
-        "setting":[
+        "settings":[
             {
                 "type": "video",
-                "id": "essence_video",
+                "id": "essence_video_block",
                 "label": "Essence video"
             }
         ]

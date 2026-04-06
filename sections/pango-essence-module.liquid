@@ -1,0 +1,69 @@
+<!-- pango-essence-module.liquid -->
+<section class="s-{{section.id}}">
+    <div class="essence-mod-wrapper">
+        {%- for block in section.blocks -%}
+        {%- case block.type -%}
+            <div class="essence-text-container">
+                <h2 class="essence-title alpina-thin">{{ block.settings.title }}</h2>
+                <div class="essence-image-container">
+                    {{ block.settings.essence_image | image_url: width: 500 | image_tag }}
+                </div>
+                <a href="{{ block.settings.button_link }}" class="main-button-black essence-button">{{ block.settings.button_text }}</a>
+            </div>
+        {%- endcase -%}
+        {%- endfor -%}
+        <div class="video-container">
+            {{ section.settings.essence_video | video_tag: autoplay: true, loop: true, muted: true, class: 'p-vid-essence' }}
+        </div>
+    </div>
+</section>
+
+
+{% schema %}
+  {
+  "name": "Pango Essence Module",
+  "settings": [
+    {
+      "type": "video",
+      "id": "essence_video",
+      "label": "Essence video"
+    }
+  ],
+  "blocks": [
+    {
+      "name": "Essence text",
+      "type": "essence_text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "The essence of emotion, captured in fragrance."
+        },
+        {
+          "type": "image_picker",
+          "id": "essence_image",
+          "label": "Essence image"
+        },
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button text",
+          "default": "Learn more"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pango Essence Module",
+      "category": "All Pango"
+    }
+  ]
+}  
+{% endschema %}

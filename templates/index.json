@@ -82,6 +82,7 @@
       "name": "Pango video",
       "settings": {
         "video": "shopify://files/videos/Campaña OTZLAB-Madrid 2026.mp4",
+        "video_mobile": "shopify://files/videos/Proyecto de vídeo 3.mp4",
         "show_progress_bar": false
       }
     }

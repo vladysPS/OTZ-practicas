@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
     const mainHeader = document.querySelector("header");
     const innerHeader = mainHeader?.querySelector(".header__row");
 
-    console.log("this is the header", innerHeader);
+
 
     // list of body classes that should trigger dark mode
     const darkPages = ["png-page-about-us", "png-page-scent-guide"];

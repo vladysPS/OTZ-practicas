@@ -2,13 +2,20 @@
 <section class="p-{{ section.id }}">
     <div class="video-container">
         {%- assign video = section.settings.video -%}
-        {{ video | video_tag: autoplay: true, loop: true, muted: true, class: 'p-vid-essence' }}
+        {{ video | video_tag: autoplay: true, loop: true, mute: true, class: 'p-vid-essence', playsinline: true }}
         <div class="controls-container">
             <div class="progress-bar">
 
             </div>
-            <div class="controls-container">
-
+            <div class="buttons-wrapper">
+                <div class="play-pause">
+                    {{ 'OTZ-icon-play.svg' | inline_asset_content }}
+                    {{ 'OTZ-icon-pause.svg' | inline_asset_content }}
+                </div>
+                <div class="sound-mute">
+                    {{ 'OTZ-icon-sound.svg' | inline_asset_content }}
+                    {{ 'OTZ-icon-mute.svg' | inline_asset_content }}
+                </div>
             </div>
 
         </div>
@@ -17,11 +24,69 @@
 
 <style>
 .p-{{ section.id }}{
+    background:black;
     .video-container{
         max-height:964px;
+        position: relative;
+        .controls-container{
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: fit-content;
+            .buttons-wrapper{
+                display: flex;
+                .play-pause,
+                .sound-mute{
+                    width: 100%;
+                    height: auto;
+                    display: block;
+    
+                }
+            }
+        }
     }
 }
 </style>
+
+<script>
+    const video = document.querySelector('.p-{{ section.id }} .p-vid-essence');
+
+    const playPauseWrapper = document.querySelector(".play-pause");
+    const playIcon = playPauseWrapper.querySelector("svg:nth-child(1)");
+    const pauseIcon = playPauseWrapper.querySelector("svg:nth-child(2)"); 
+    playIcon.style.display = "none";
+    playPauseWrapper.addEventListener("click", ()=>{
+        if(video.paused){
+            video.play();
+            playIcon.style.display = "none";
+            pauseIcon.style.display = "block";
+        } else {
+            video.pause();
+            playIcon.style.display = "block";
+            pauseIcon.style.display = "none";
+        }
+    });
+
+    const soundMuteWrapper = document.querySelector(".sound-mute");
+    const soundIcon = soundMuteWrapper.querySelector("svg:nth-child(1)");
+    const muteIcon = soundMuteWrapper.querySelector("svg:nth-child(2)");
+    soundIcon.style.display = "none";
+    soundMuteWrapper.addEventListener("click", () => {
+        if (video.muted) {
+            
+        video.volume = 1.0;
+        video.muted = false;
+        soundIcon.style.display = "block";
+        muteIcon.style.display = "none";
+        } else {
+        video.muted = true;
+        soundIcon.style.display = "none";
+        muteIcon.style.display = "block";
+        }
+    });  
+    
+
+</script>
 
 {% schema %}
   {

@@ -81,7 +81,7 @@
       "type": "pango-video",
       "name": "Pango video",
       "settings": {
-        "video": "shopify://files/videos/sec-3-video.mp4",
+        "video": "shopify://files/videos/Campaña OTZLAB-Madrid 2026.mp4",
         "show_progress_bar": false
       }
     }

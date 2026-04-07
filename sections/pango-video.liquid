@@ -1,20 +1,22 @@
 <!-- pango-video.liquid -->
 <section class="p-{{ section.id }}">
     <div class="video-container">
-        {%- assign video = section.settings.video -%}
-        {{ video | video_tag: autoplay: true, loop: true, mute: true, class: 'p-vid-essence', playsinline: true }}
+        {%- assign video_desktop = section.settings.video -%}
+        {%- assign video_mobile = section.settings.video_mobile -%}
+        {{ video_desktop | video_tag: autoplay: true, loop: true, mute: true, class: 'p-vid-essence-desktop', playsinline: true }}
+        {{ video_mobile  | video_tag: autoplay: true, loop: true, mute: true, class: 'p-vid-essence-mobile', playsinline: true }}
         <div class="controls-container">
             <div class="progress-bar">
 
             </div>
             <div class="buttons-wrapper">
-                <div class="play-pause">
-                    {{ 'OTZ-icon-play.svg' | inline_asset_content }}
-                    {{ 'OTZ-icon-pause.svg' | inline_asset_content }}
-                </div>
                 <div class="sound-mute">
                     {{ 'OTZ-icon-sound.svg' | inline_asset_content }}
                     {{ 'OTZ-icon-mute.svg' | inline_asset_content }}
+                </div>
+                <div class="play-pause">
+                    {{ 'OTZ-icon-play.svg' | inline_asset_content }}
+                    {{ 'OTZ-icon-pause.svg' | inline_asset_content }}
                 </div>
             </div>
 
@@ -26,66 +28,129 @@
 .p-{{ section.id }}{
     background:black;
     .video-container{
-        max-height:964px;
         position: relative;
+        .p-vid-essence-desktop{
+            display: none;
+        }
+        .p-vid-essence-mobile{
+            aspect-ratio: 393/550;
+            object-fit: cover;
+        }
         .controls-container{
             position: absolute;
             bottom: 0;
             right: 0;
             width: fit-content;
             .buttons-wrapper{
+                padding:32px 18px;
                 display: flex;
+                gap:10px;
                 .play-pause,
                 .sound-mute{
-                    width: 100%;
-                    height: auto;
-                    display: block;
+                    display: flex;
+                    width: 44px;
+                    height: 34px;
+                    justify-content: center;
+                    align-items: center;                    
+                    background: rgba(255, 255, 255, 0.20);
+                    svg{
+                        width: 15px;
+                        height: 15px;
+                    }
     
                 }
             }
+        }
+    }
+    @media (min-width:768px){
+        .video-container{
+            .p-vid-essence-desktop{
+                display: block;
+                object-fit: fill;
+                min-width: 100%;
+                background: blueviolet;
+            }
+            .p-vid-essence-mobile{
+                display: none;
+            }      
+            .controls-container{
+
+                .buttons-wrapper{
+                    padding:20px 20px;
+                    .play-pause,
+                    .sound-mute{
+                        display: flex;
+                        width: 44px;
+                        height: 34px;
+                        justify-content: center;
+                        align-items: center;                    
+                        background: rgba(255, 255, 255, 0.20);
+                        svg{
+                            width: 15px;
+                            height: 15px;
+                        }
+        
+                    }
+                }
+            }                  
         }
     }
 }
 </style>
 
 <script>
-    const video = document.querySelector('.p-{{ section.id }} .p-vid-essence');
+    const sectionContainer = document.querySelector('.p-{{ section.id }}');
+    const videoDesktop = sectionContainer.querySelector('.p-vid-essence-desktop');
+    const videoMobile = sectionContainer.querySelector('.p-vid-essence-mobile');
 
-    const playPauseWrapper = document.querySelector(".play-pause");
+    
+    const getActiveVideo = () => {
+        if (window.getComputedStyle(videoDesktop).display !== 'none') {
+            return videoDesktop;
+        }
+        return videoMobile;
+    };
+
+    const playPauseWrapper = sectionContainer.querySelector(".play-pause");
     const playIcon = playPauseWrapper.querySelector("svg:nth-child(1)");
     const pauseIcon = playPauseWrapper.querySelector("svg:nth-child(2)"); 
+    
     playIcon.style.display = "none";
-    playPauseWrapper.addEventListener("click", ()=>{
-        if(video.paused){
-            video.play();
+
+    playPauseWrapper.addEventListener("click", () => {
+        const activeVideo = getActiveVideo();
+        
+        if (activeVideo.paused) {
+            activeVideo.play();
             playIcon.style.display = "none";
             pauseIcon.style.display = "block";
         } else {
-            video.pause();
+            activeVideo.pause();
             playIcon.style.display = "block";
             pauseIcon.style.display = "none";
         }
     });
 
-    const soundMuteWrapper = document.querySelector(".sound-mute");
+    const soundMuteWrapper = sectionContainer.querySelector(".sound-mute");
     const soundIcon = soundMuteWrapper.querySelector("svg:nth-child(1)");
     const muteIcon = soundMuteWrapper.querySelector("svg:nth-child(2)");
+    
     soundIcon.style.display = "none";
+
     soundMuteWrapper.addEventListener("click", () => {
-        if (video.muted) {
-            
-        video.volume = 1.0;
-        video.muted = false;
-        soundIcon.style.display = "block";
-        muteIcon.style.display = "none";
+        const activeVideo = getActiveVideo();
+
+        if (activeVideo.muted) {
+            activeVideo.volume = 1.0;
+            activeVideo.muted = false;
+            soundIcon.style.display = "block";
+            muteIcon.style.display = "none";
         } else {
-        video.muted = true;
-        soundIcon.style.display = "none";
-        muteIcon.style.display = "block";
+            activeVideo.muted = true;
+            soundIcon.style.display = "none";
+            muteIcon.style.display = "block";
         }
     });  
-    
-
 </script>
 
 {% schema %}

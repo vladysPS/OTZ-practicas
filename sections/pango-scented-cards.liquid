@@ -21,6 +21,12 @@
             {%- endfor -%}
         </div>
 
+        <div class="button-container">
+            <div>
+                <a href="{{ section.settings.button_link }} ">{{ section.settings.button_text }}</a>
+            </div>
+        </div>
+
     </div>
 </section>
 
@@ -40,6 +46,17 @@
       "id": "paragraph",
       "label": "Paragraph",
       "default": "<p>Our collection unfolds like a symphony, beginning with soft, luminous scents that whisper on the skin, gradually building towards deeper, more opulent creations.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "DISCOVER YOUR SCENT"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
     }
   ],
   "blocks": [

@@ -12,7 +12,7 @@
                 <div class="swiper-wrapper">
                 {%- for product in carousel_collection_products -%}
                     <div class="swiper-slide">
-                        {{ product.metafields.custom.carousel_image.value |  image_url: width:image.width  |image_tag }}
+                        {{ product.metafields.custom.otz_carousel_image.value |  image_url: width:image.width  |image_tag }}
                         <div class="prod-data" style="display:none;">
                             <h3 class="prod-title">{{ product.title }}</h3>
                             <p class="prod-price">{{ product.price | money }}</p>

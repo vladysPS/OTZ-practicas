@@ -33,6 +33,7 @@
     },
     "pango_typewriter_pFBLKd": {
       "type": "pango-typewriter",
+      "disabled": true,
       "name": "Pango Typewriter",
       "settings": {
         "paragraph": "<p>We transform sensations into passions, encapsulating the purest and deepest essence of our roots in perfumes.</p>",
@@ -44,6 +45,7 @@
     },
     "pango_carousel_3K78Hw": {
       "type": "pango-carousel",
+      "disabled": true,
       "name": "Pango Carousel",
       "settings": {
         "carousel_collection": "otz-all-products",
@@ -74,16 +76,67 @@
         "essence_text_ha8JTt",
         "essence_video_6UGG6U"
       ],
+      "disabled": true,
       "name": "Pango Essence Module",
       "settings": {}
     },
     "pango_video_39EUAL": {
       "type": "pango-video",
+      "disabled": true,
       "name": "Pango video",
       "settings": {
         "video": "shopify://files/videos/Campaña OTZLAB-Madrid 2026.mp4",
         "video_mobile": "shopify://files/videos/Proyecto de vídeo 3.mp4",
         "show_progress_bar": false
+      }
+    },
+    "pango_scented_cards_kdDzL6": {
+      "type": "pango-scented-cards",
+      "blocks": {
+        "soundscape_cards_zUtKkr": {
+          "type": "soundscape_cards",
+          "settings": {
+            "product": "arcadia"
+          }
+        },
+        "soundscape_cards_zytUaV": {
+          "type": "soundscape_cards",
+          "settings": {
+            "product": "merina"
+          }
+        },
+        "soundscape_cards_3WjVcd": {
+          "type": "soundscape_cards",
+          "settings": {
+            "product": "raices"
+          }
+        },
+        "soundscape_cards_AYx4C4": {
+          "type": "soundscape_cards",
+          "settings": {
+            "product": "lumieres"
+          }
+        },
+        "soundscape_cards_bxybjk": {
+          "type": "soundscape_cards",
+          "settings": {
+            "product": "air"
+          }
+        }
+      },
+      "block_order": [
+        "soundscape_cards_zUtKkr",
+        "soundscape_cards_zytUaV",
+        "soundscape_cards_3WjVcd",
+        "soundscape_cards_AYx4C4",
+        "soundscape_cards_bxybjk"
+      ],
+      "name": "Pango Scented Cards",
+      "settings": {
+        "heading": "OUR SCENTED SPECTRUM",
+        "paragraph": "<p>Our collection unfolds like a symphony, beginning with soft, luminous scents that whisper on the skin, gradually building towards deeper, more opulent creations.</p>",
+        "button_text": "DISCOVER YOUR SCENT",
+        "button_link": ""
       }
     }
   },
@@ -93,6 +146,7 @@
     "pango_typewriter_pFBLKd",
     "pango_carousel_3K78Hw",
     "pango_essence_module_wxLCLe",
-    "pango_video_39EUAL"
+    "pango_video_39EUAL",
+    "pango_scented_cards_kdDzL6"
   ]
 }

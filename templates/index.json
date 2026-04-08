@@ -93,22 +93,10 @@
     "pango_scented_cards_kdDzL6": {
       "type": "pango-scented-cards",
       "blocks": {
-        "soundscape_cards_zUtKkr": {
+        "soundscape_cards_bxybjk": {
           "type": "soundscape_cards",
           "settings": {
-            "product": "arcadia"
-          }
-        },
-        "soundscape_cards_zytUaV": {
-          "type": "soundscape_cards",
-          "settings": {
-            "product": "merina"
-          }
-        },
-        "soundscape_cards_3WjVcd": {
-          "type": "soundscape_cards",
-          "settings": {
-            "product": "raices"
+            "product": "air"
           }
         },
         "soundscape_cards_AYx4C4": {
@@ -117,19 +105,31 @@
             "product": "lumieres"
           }
         },
-        "soundscape_cards_bxybjk": {
+        "soundscape_cards_3WjVcd": {
           "type": "soundscape_cards",
           "settings": {
-            "product": "air"
+            "product": "raices"
+          }
+        },
+        "soundscape_cards_zytUaV": {
+          "type": "soundscape_cards",
+          "settings": {
+            "product": "merina"
+          }
+        },
+        "soundscape_cards_zUtKkr": {
+          "type": "soundscape_cards",
+          "settings": {
+            "product": "arcadia"
           }
         }
       },
       "block_order": [
-        "soundscape_cards_zUtKkr",
-        "soundscape_cards_zytUaV",
-        "soundscape_cards_3WjVcd",
+        "soundscape_cards_bxybjk",
         "soundscape_cards_AYx4C4",
-        "soundscape_cards_bxybjk"
+        "soundscape_cards_3WjVcd",
+        "soundscape_cards_zytUaV",
+        "soundscape_cards_zUtKkr"
       ],
       "name": "Pango Scented Cards",
       "settings": {

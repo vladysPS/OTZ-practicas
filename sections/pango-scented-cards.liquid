@@ -3,33 +3,97 @@
     <div class="section-wrapper">
         <div class="upper-container">
             <div class="text-container">
-                <h2>{{ section.settings.heading }} </h2>
-                {{ section.settings.paragraph }} 
+                <h2 class="alpina-thin">{{ section.settings.heading }} </h2>
+                <div class="alpina-typewriter">
+                    {{ section.settings.paragraph }} 
+                </div>
+            </div>
+            <div class="index-container">
+                <ul class="alpina-typewriter">
+                    {%- for block in section.blocks -%}
+                    {%- case block.type -%}
+    
+                        {%- when 'soundscape_cards' -%}
+                        {%- assign product = block.settings.product -%}
+                            <li>{{ forloop.index }}</li>
+    
+                    {%- endcase -%}
+                    {%- endfor -%}                
+                </ul>
             </div>
         </div>
 
         <div class="soundscape-cards-container">
-            {%- for block in section.blocks -%}
-            {%- case block.type -%}
+             <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    
+                    {%- for block in section.blocks -%}
+                    {%- case block.type -%}
 
-                {%- when 'soundscape_cards' -%}
-                {%- assign product = block.settings.product -%}
-                {{ product.title }}
-                {{ product.description }}
+                        {%- when 'soundscape_cards' -%}
+                        {%- assign product = block.settings.product -%}
+                        <div class="swiper-slide">
+                        <div class="card-container" style="width:400px">
+                            <div class="sound-container">
+                                <div class="texture container">
+                                    texture
+                                </div>
+                                <div class="soundscape-text">
+                                    <span>THE SOUNDSCAPE</span>
+                                    <h4>THE TITLE OF THE SOUNDSCAPE</h4>
+                                </div>
+                                <div class="play-button">
+                                    {{ 'otz-play-icon.svg' | inline_asset_content }}
+                                </div>
+                            </div>
+                            <div class="image-container">
+                                {{ product.metafields.custom.otz_product_soundset.value |  image_url: width:image.width |  image_tag   }}
+                                <div class="name-index">
+                                    <span>{{ forloop.index }}</span>
+                                    <span>{{ product.title }}</span>
+                                </div> 
+                            </div>
+                        </div>
+                        </div>
+                    {%- endcase -%}
+                    {%- endfor -%}
+                </div>
+            </div>
 
-            {%- endcase -%}
-            {%- endfor -%}
         </div>
 
         <div class="button-container">
             <div>
-                <a href="{{ section.settings.button_link }} ">{{ section.settings.button_text }}</a>
+                <a class="main-button-black" href="{{ section.settings.button_link }} ">{{ section.settings.button_text }}</a>
             </div>
         </div>
 
     </div>
 </section>
 
+<style>
+.p-{{section.id}}{
+    .soundscape-cards-container{
+        .swiper {
+        width: 100%;
+        height: 100%;
+        }
+        .swiper-slide {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
+    }
+}
+</style>
+
+<script>
+var swiper = new Swiper(".mySwiper", {
+    slidesPerView:4,
+    spaceBetween:20         
+});
+</script>
 
 {% schema %}
   {

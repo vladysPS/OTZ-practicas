@@ -4,7 +4,7 @@
         <div class="upper-container">
             <div class="text-container">
                 <h2 class="alpina-thin">{{ section.settings.heading }} </h2>
-                <div class="alpina-typewriter">
+                <div class="paragraph-container alpina-typewriter">
                     {{ section.settings.paragraph }} 
                 </div>
             </div>
@@ -15,7 +15,7 @@
     
                         {%- when 'soundscape_cards' -%}
                         {%- assign product = block.settings.product -%}
-                            <li>{{ forloop.index }}</li>
+                            <li><span>{{ product.title }}</span>{{ forloop.index }}</li>
     
                     {%- endcase -%}
                     {%- endfor -%}                
@@ -24,7 +24,7 @@
         </div>
 
         <div class="soundscape-cards-container">
-             <div class="swiper mySwiper">
+             <div class="swiper mySwiperScent">
                 <div class="swiper-wrapper">
                     
                     {%- for block in section.blocks -%}
@@ -32,29 +32,33 @@
 
                         {%- when 'soundscape_cards' -%}
                         {%- assign product = block.settings.product -%}
+                        {% if product.title == "Air" %}
                         <div class="swiper-slide">
-                        <div class="card-container" style="width:400px">
-                            <div class="sound-container">
-                                <div class="texture container">
-                                    texture
+                            <div class="card-container" style="width:400px">
+                                <div class="sound-player-container">
+                                    <div class="texture container" style="width: 20px;">
+                                        {{ product.metafields.custom.soundtrack.value.texture |  image_url: width:image.width |  image_tag }}
+                                    </div>
+                                    <div class="soundscape-text">
+                                        <span>THE SOUND SCAPE</span>
+                                        <h4>{{ product.metafields.custom.soundtrack.value.soundscape_name }}</h4>
+                                    </div>
+                                    <div class="play-button">
+                                        <audio controls src="{{ product.metafields.custom.soundtrack.value.audio_file | file_url }}"></audio>
+                                        {{ 'otz-play-icon.svg' | inline_asset_content }}
+                                    </div>
                                 </div>
-                                <div class="soundscape-text">
-                                    <span>THE SOUNDSCAPE</span>
-                                    <h4>THE TITLE OF THE SOUNDSCAPE</h4>
-                                </div>
-                                <div class="play-button">
-                                    {{ 'otz-play-icon.svg' | inline_asset_content }}
+                                <div class="image-container">
+                                    {{ product.metafields.custom.otz_product_soundset.value |  image_url: width:image.width |  image_tag   }}
+                                    <div class="name-index">
+                                        <span>{{ forloop.index }}</span>
+                                        <span>{{ product.title }}</span>
+                                    </div> 
                                 </div>
                             </div>
-                            <div class="image-container">
-                                {{ product.metafields.custom.otz_product_soundset.value |  image_url: width:image.width |  image_tag   }}
-                                <div class="name-index">
-                                    <span>{{ forloop.index }}</span>
-                                    <span>{{ product.title }}</span>
-                                </div> 
-                            </div>
                         </div>
-                        </div>
+                        {% endif %}
+
                     {%- endcase -%}
                     {%- endfor -%}
                 </div>
@@ -73,6 +77,38 @@
 
 <style>
 .p-{{section.id}}{
+    padding:50px 0;
+    .upper-container{
+        margin-bottom:40px;
+        text-align: center;
+        .text-container{
+            h2{
+                font-size: 2.5rem;
+                min-width: 227px;
+                margin-bottom:20px;
+            }
+            .paragraph-container{
+                text-transform: uppercase;
+                font-size: 0.75rem;
+                line-height: 1.2;
+                display: flex;
+                justify-content: center;
+                p{max-width:360px;}
+            }
+        }
+        .index-container{
+            margin-top: 20px;
+            ul{
+                margin:0;
+                padding:0;
+                list-style: none;
+                display: flex;
+                gap: 10px;
+                font-size:0.62rem;
+                justify-content: center;
+            }
+        }
+    }
     .soundscape-cards-container{
         .swiper {
         width: 100%;
@@ -85,13 +121,58 @@
         }
 
     }
+    @media (min-width:768px){
+        .upper-container{
+            padding-inline:40px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            .text-container{
+                display: flex;
+                text-align: left;
+                h2{
+                    font-size: 3.5rem;
+                    max-width: 400px;
+                    margin-bottom: 0;
+                }
+                .paragraph-container{
+                    text-transform: uppercase;
+                    font-size: 1rem;
+                    line-height: 1.2;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    p{max-width:590px;}
+                }
+            }
+            .index-container{
+                margin-top: 0;
+                ul{
+                    gap: 0;
+                    font-size:0.62rem;
+                    justify-content: center;
+                    flex-direction: column;
+                    li{
+                        span{
+                            margin-right: 3px;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 </style>
 
 <script>
-var swiper = new Swiper(".mySwiper", {
-    slidesPerView:4,
-    spaceBetween:20         
+let swiper = new Swiper(".mySwiperScent", {
+    slidesPerView:2.5,
+    spaceBetween:20,
+    breakpoints:{
+        768: {
+            slidesPerView: 4
+        }   
+    }     
 });
 </script>
 

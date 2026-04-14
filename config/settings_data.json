@@ -89,6 +89,13 @@
         "type": "shopify://apps/sk-whatsapp-chat-button/blocks/app-embed/f26357f3-3b4f-4ccc-8c8a-a4df2fc1dfc5",
         "disabled": false,
         "settings": {}
+      },
+      "8133853093390032344": {
+        "type": "shopify://apps/visual-quiz-builder/blocks/app-embed/82108934-e042-4d36-9032-f4f6674fae34",
+        "disabled": false,
+        "settings": {
+          "render": "shadow"
+        }
       }
     },
     "color_schemes": {

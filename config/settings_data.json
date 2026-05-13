@@ -101,6 +101,62 @@
         "type": "shopify://apps/quizify-product-quiz-builder/blocks/quizify-app-embed/a183a207-633e-46c0-841f-299e90a9605b",
         "disabled": false,
         "settings": {}
+      },
+      "11592693266205246040": {
+        "type": "shopify://apps/recomma-product-quiz-builder/blocks/recommenda_ab_link_quiz/66d3c4bd-027b-4c27-8ac0-2965d95b778a",
+        "disabled": false,
+        "settings": {
+          "color": "#838383",
+          "hide_close_button": false,
+          "width": 80,
+          "height": 80,
+          "restart_on_button_click": false
+        }
+      },
+      "11377550205083824030": {
+        "type": "shopify://apps/recomma-product-quiz-builder/blocks/recommenda_ab_popup_quiz/66d3c4bd-027b-4c27-8ac0-2965d95b778a",
+        "disabled": false,
+        "settings": {
+          "ab_test_id": 0,
+          "open_delay": 1,
+          "hide_after_one_submission": false,
+          "hide_after_close": false,
+          "width": 80,
+          "width_mobile": 80,
+          "height": 65,
+          "color": "#838383",
+          "hide_close_button": false,
+          "show_in_pages": ""
+        }
+      },
+      "5733569959556273306": {
+        "type": "shopify://apps/recomma-product-quiz-builder/blocks/recommenda_link_quiz/66d3c4bd-027b-4c27-8ac0-2965d95b778a",
+        "disabled": false,
+        "settings": {
+          "color": "#838383",
+          "hide_close_button": false,
+          "width": 80,
+          "height": 80,
+          "mobile_width": 95,
+          "mobile_height": 90,
+          "restart_on_button_click": false
+        }
+      },
+      "18134635481486484319": {
+        "type": "shopify://apps/recomma-product-quiz-builder/blocks/recommenda_popup_quiz/66d3c4bd-027b-4c27-8ac0-2965d95b778a",
+        "disabled": false,
+        "settings": {
+          "quiz_id": 0,
+          "open_delay": 1,
+          "hide_after_one_submission": false,
+          "hide_after_close": false,
+          "width": 80,
+          "width_mobile": 80,
+          "height": 65,
+          "color": "#838383",
+          "hide_close_button": false,
+          "show_in_pages": ""
+        }
       }
     },
     "color_schemes": {

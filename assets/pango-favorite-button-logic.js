@@ -74,8 +74,12 @@ class FavoriteButton extends HTMLElement {
   updateUI(isFavorite){
     if (isFavorite) {
       console.log("show full heart");
+      this.heartFull.style.display = 'block';
+      this.heartEmpty.style.display = 'none';
     } else {
       console.log("show empty heart");
+      this.heartFull.style.display = 'none';
+      this.heartEmpty.style.display = 'block';
     }
   };
 

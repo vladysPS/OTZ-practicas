@@ -2,7 +2,7 @@
 console.log('pango-favorite-button-logic.js loaded!');
 //laod this on page /collections/otz-all-products
 
-document.addEventListener('DOMContentLoaded', () => {
+/* document.addEventListener('DOMContentLoaded', () => {
     const likedProducts = [];
     localStorage.setItem("likedProducts", JSON.stringify(likedProducts));
 
@@ -29,4 +29,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
   });
-});
+}); */
+
+function toggleFavorite(btn) {
+  const handle = btn.dataset.handle;
+  const favs = getFavorites();
+  const idx = favs.indexOf(handle);
+  if (idx === -1) { favs.push(handle); }
+  else            { favs.splice(idx, 1); }
+  saveFavorites(favs);
+  syncHearts();
+}

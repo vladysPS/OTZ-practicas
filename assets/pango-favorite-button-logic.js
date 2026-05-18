@@ -5,8 +5,8 @@ class FavoriteButton extends HTMLElement {
   constructor() {
     super();
 
-    this.productHandle = this.dataset.productHandle;
     this.addEventListener('click', this.handleClick);
+    this.isFavorite = false;
   }
 
   handleClick = () => {

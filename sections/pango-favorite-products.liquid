@@ -84,7 +84,7 @@
   const emptyMsg = document.getElementById('pango-favorites-empty');
 
   let favorites = [];
-  try { favorites = JSON.parse(localStorage.getItem('likedProducts')) || []; } catch (e) {}
+  try { favorites = JSON.parse(localStorage.getItem('favoriteProducts')) || []; } catch (e) {}
 
   if (!favorites.length) {
     emptyMsg.style.display = 'block';

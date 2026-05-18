@@ -1,5 +1,4 @@
 // @ts-nocheck
-console.log('pango-favorite-button-logic.js loaded!');
 
 // Initialize localStorage only once
 if (!localStorage.getItem('favoriteProducts')) {
@@ -21,13 +20,9 @@ class FavoriteButton extends HTMLElement {
       this.heartFull = this.querySelector('.heart-full');
       this.heartEmpty = this.querySelector('.heart-empty');
 
-      console.log('this is full svg', this.heartFull);
-
       const favorites = this.getFavorites();
 
       this.isFavorite = favorites.includes(this.dataset.productHandle);
-      console.log("the product", this.dataset.productHandle, this.isFavorite);
-
       this.updateUI(this.isFavorite);
     });
   }
@@ -63,21 +58,16 @@ class FavoriteButton extends HTMLElement {
       favorites.push(productHandle);
 
       this.isFavorite = true;
-
-      console.log('Added to favorites:', productHandle);
     }
 
     this.saveFavorites(favorites);
     this.updateUI(this.isFavorite);
-    console.log('Updated favorites:', favorites);
   };
   updateUI(isFavorite){
     if (isFavorite) {
-      console.log("show full heart");
       this.heartFull.style.display = 'block';
       this.heartEmpty.style.display = 'none';
     } else {
-      console.log("show empty heart");
       this.heartFull.style.display = 'none';
       this.heartEmpty.style.display = 'block';
     }

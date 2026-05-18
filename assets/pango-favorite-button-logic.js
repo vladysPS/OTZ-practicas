@@ -33,7 +33,12 @@ class FavoriteButton extends HTMLElement {
   getFavorites() {
     return JSON.parse(localStorage.getItem('favoriteProducts')) || [];
   }
-
+  saveFavorites(favorites) {
+    localStorage.setItem(
+      'favoriteProducts',
+      JSON.stringify(favorites)
+    );
+  }
   handleClick = () => {
     const productHandle = this.dataset.productHandle;
 

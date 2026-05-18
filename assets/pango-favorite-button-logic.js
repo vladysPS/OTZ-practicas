@@ -11,14 +11,18 @@ class FavoriteButton extends HTMLElement {
     super();
 
     this.isFavorite = false;
+    requestAnimationFrame(() => {
+      this.heartFull = this.querySelector('.heart-full');
+      this.heartEmpty = this.querySelector('.heart-empty');
+    )};
   }
 
   connectedCallback() {
     this.addEventListener('click', this.handleClick);
 
     requestAnimationFrame(() => {
-      this.heartFull = this.querySelector('.heart-full');
-      this.heartEmpty = this.querySelector('.heart-empty');
+/*       this.heartFull = this.querySelector('.heart-full');
+      this.heartEmpty = this.querySelector('.heart-empty'); */
 
       console.log('this is full svg', this.heartFull);
 

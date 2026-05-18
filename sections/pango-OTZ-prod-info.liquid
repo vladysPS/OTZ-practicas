@@ -8,6 +8,7 @@
     <div class="p-prod-content">
             <div class="p-content-container">
                 <h1>{{ closest.product.title }}</h1>
+                {%  render 'pango-favorites-button' %}
     
                 <div class="p-prod-extra-info">
                     <span class="scent-attribute">{{ closest.product.metafields.custom.otz_scent_attributes }}</span>

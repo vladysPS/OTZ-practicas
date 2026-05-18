@@ -21,6 +21,8 @@ class FavoriteButton extends HTMLElement {
     const favorites = this.getFavorites();
 
     this.isFavorite = favorites.includes(this.dataset.productHandle);
+    this.querySelector(".heart-full");
+    console.log("this is full heart svg", this.heartFull);
 
     console.log(
       this.dataset.productHandle,

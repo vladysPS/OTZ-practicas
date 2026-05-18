@@ -17,6 +17,14 @@ class FavoriteButton extends HTMLElement {
     this.addEventListener('click', this.handleClick);
 
     const favorites = this.getFavorites();
+
+    this.isFavorite = favorites.includes(this.dataset.productHandle);
+
+    console.log(
+      this.dataset.productHandle,
+      'initial favorite state:',
+      this.isFavorite
+    );
   }
 
   disconnectedCallback() {

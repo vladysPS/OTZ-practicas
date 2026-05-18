@@ -11,8 +11,6 @@ class FavoriteButton extends HTMLElement {
     super();
 
     this.isFavorite = false;
-    this.heartFull = this.querySelector(".heart-full");
-    console.log("this is full heart svg", this.heartFull);
   }
 
   connectedCallback() {
@@ -21,9 +19,7 @@ class FavoriteButton extends HTMLElement {
     const favorites = this.getFavorites();
 
     this.isFavorite = favorites.includes(this.dataset.productHandle);
-    this.querySelector(".heart-full");
-    console.log("this is full heart svg", this.heartFull);
-
+    console.log("this is the elemtn", this);
     console.log(
       this.dataset.productHandle,
       'initial favorite state:',

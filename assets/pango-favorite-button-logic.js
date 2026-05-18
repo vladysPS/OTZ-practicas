@@ -19,7 +19,7 @@ class FavoriteButton extends HTMLElement {
   handleClick = () => {
     this.isFavorite = !this.isFavorite;
 
-    console.log(this.dataset.productHandle, this.isFavorite);
+    console.log("we clicked in-->",this.dataset.productHandle, this.isFavorite);
   };
 }
 

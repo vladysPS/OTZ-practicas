@@ -30,16 +30,39 @@ class FavoriteButton extends HTMLElement {
   disconnectedCallback() {
     this.removeEventListener('click', this.handleClick);
   }
-
-  handleClick = () => {
-    this.isFavorite = !this.isFavorite;
-
-    console.log("we clicked in-->",this.dataset.productHandle, this.isFavorite);
-  };
-
   getFavorites() {
     return JSON.parse(localStorage.getItem('favoriteProducts')) || [];
   }
+
+  handleClick = () => {
+    const productHandle = this.dataset.productHandle;
+
+    let favorites = this.getFavorites();
+
+    if (this.isFavorite) {
+      // REMOVE from favorites
+      favorites = favorites.filter(
+        handle => handle !== productHandle
+      );
+
+      this.isFavorite = false;
+
+      console.log('Removed from favorites:', productHandle);
+    } else {
+      // ADD to favorites
+      favorites.push(productHandle);
+
+      this.isFavorite = true;
+
+      console.log('Added to favorites:', productHandle);
+    }
+
+    this.saveFavorites(favorites);
+
+    console.log('Updated favorites:', favorites);
+  };
+
+
 }
 
 customElements.define('favorite-button', FavoriteButton);

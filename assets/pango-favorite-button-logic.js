@@ -68,7 +68,7 @@ class FavoriteButton extends HTMLElement {
     }
 
     this.saveFavorites(favorites);
-
+    this.updateUI(this.isFavorite);
     console.log('Updated favorites:', favorites);
   };
   updateUI(isFavorite){

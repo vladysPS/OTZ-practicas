@@ -1,55 +1,269 @@
 <!-- pango-favorite-products.liquid -->
 
-
 <section class="p-{{ section.id }}">
- <div class="page-width">
-  here well have our favorite products update
- </div> 
+  <div class="page-width">
+    <div class="pango-favorites__grid" id="pango-favorites-grid">
+      <!-- Products will be injected here -->
+    </div>
+    <p class="pango-favorites__empty" id="pango-favorites-empty" style="display:none;">
+      No favourite products yet.
+    </p>
+  </div>
 </section>
-
-
 
 
 {%  # CSS  %}
 <style>
-.p-{{ section.id }}{
-
-
+.p-{{ section.id }} {
+  padding: 40px 0;
 }
 
-
-@media(min-width:768px){
- .p-{{ section.id }}{
-  
- }
+.pango-favorites__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
 }
 
+@media(min-width: 768px) {
+  .pango-favorites__grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
 
+/* Fallback card styles (used when product-card snippet is unavailable) */
+.pango-fav-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pango-fav-card__image {
+  aspect-ratio: 1;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+}
+
+.pango-fav-card__image--placeholder {
+  aspect-ratio: 1;
+  background: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #aaa;
+  font-size: 13px;
+}
+
+.pango-fav-card__body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.pango-fav-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.pango-fav-card__price {
+  font-size: 13px;
+  color: #555;
+  margin: 0;
+}
+
+.pango-fav-card__atc {
+  margin-top: auto;
+  background: #000;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 13px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.pango-fav-card__atc:hover {
+  background: #333;
+}
+
+.pango-fav-card__atc:disabled {
+  background: #999;
+  cursor: not-allowed;
+}
 </style>
 
 
 {%  # JAVASCRIPT  %}
 <script>
-  const STORAGE_KEY = 'likedProducts'; 
-   let favorites = [];
+(function () {
+  const STORAGE_KEY = 'likedProducts';
+  const grid = document.getElementById('pango-favorites-grid');
+  const emptyMsg = document.getElementById('pango-favorites-empty');
+
+  // ── 1. Read handles from localStorage ──────────────────────────────────────
+  let favorites = [];
   try {
     favorites = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   } catch (e) {
     favorites = [];
   }
+
+  if (!favorites.length) {
+    emptyMsg.style.display = 'block';
+    return;
+  }
+
+  // ── 2. Fetch each product from the Shopify Ajax API ────────────────────────
+  async function fetchProduct(handle) {
+    const res = await fetch(`/products/${handle}.js`);
+    if (!res.ok) return null;
+    return res.json();
+  }
+
+  // ── 3a. Try to render via product-card snippet (section rendering API) ─────
+  // Shopify's Section Rendering API lets us pull rendered Liquid snippets.
+  // We request the snippet by wrapping it in a throw-away section render call.
+  // If your theme exposes a section that renders product-card, swap the URL below.
+  // Since snippets can't be fetched directly, we fall back to a JS-built card.
+  // If you have a dedicated "product-card" section wrapper, replace this function.
+  async function fetchProductCardHTML(handle) {
+    // Attempt: fetch a section that renders the card snippet for a given product.
+    // Adjust the section name to whatever wraps your product-card snippet.
+    const url = `/products/${handle}?section_id=product-card-snippet`;
+    try {
+      const res = await fetch(url);
+      if (!res.ok) return null;
+      const html = await res.text();
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      // Shopify wraps section renders in a <div id="shopify-section-...">
+      const el = doc.querySelector('[id^="shopify-section-"]');
+      return el ? el.innerHTML : null;
+    } catch {
+      return null;
+    }
+  }
+
+  // ── 3b. Fallback: build a card from the product JSON ──────────────────────
+  function buildFallbackCard(product) {
+    const variant = product.variants[0];
+    const image = product.images[0];
+    const price = (variant.price / 100).toLocaleString('en-US', {
+      style: 'currency',
+      currency: product.currency || '{{ cart.currency.iso_code }}'
+    });
+
+    const card = document.createElement('div');
+    card.innerHTML = `
+      <a class="pango-fav-card" href="/products/${product.handle}">
+        ${image
+          ? `<img class="pango-fav-card__image" src="${image}" alt="${product.title}" loading="lazy">`
+          : `<div class="pango-fav-card__image--placeholder">No image</div>`
+        }
+        <div class="pango-fav-card__body">
+          <p class="pango-fav-card__title">${product.title}</p>
+          <p class="pango-fav-card__price">${price}</p>
+          <button
+            class="pango-fav-card__atc"
+            data-variant-id="${variant.id}"
+            data-available="${variant.available}"
+            ${!variant.available ? 'disabled' : ''}
+          >
+            ${variant.available ? 'Add to cart' : 'Sold out'}
+          </button>
+        </div>
+      </a>
+    `;
+    return card.firstElementChild;
+  }
+
+  // ── 4. Add to cart via Ajax ────────────────────────────────────────────────
+  async function addToCart(variantId, btn) {
+    btn.disabled = true;
+    btn.textContent = 'Adding…';
+    try {
+      const res = await fetch('/cart/add.js', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: variantId, quantity: 1 })
+      });
+      if (!res.ok) throw new Error();
+      btn.textContent = 'Added!';
+      // Optionally refresh the cart drawer/counter here
+      document.dispatchEvent(new CustomEvent('cart:refresh'));
+    } catch {
+      btn.textContent = 'Error – try again';
+      btn.disabled = false;
+    }
+  }
+
+  // ── 5. Orchestrate: fetch all products and render ─────────────────────────
+  async function init() {
+    const results = await Promise.all(favorites.map(async (handle) => {
+      const [product, snippetHTML] = await Promise.all([
+        fetchProduct(handle),
+        fetchProductCardHTML(handle)
+      ]);
+      return { handle, product, snippetHTML };
+    }));
+
+    let rendered = 0;
+
+    results.forEach(({ product, snippetHTML }) => {
+      if (!product) return; // handle not found, skip
+
+      let cardEl;
+
+      if (snippetHTML) {
+        // ── Use theme's product-card snippet ──
+        const wrapper = document.createElement('div');
+        wrapper.innerHTML = snippetHTML;
+        cardEl = wrapper.firstElementChild;
+      } else {
+        // ── Use fallback card ──
+        cardEl = buildFallbackCard(product);
+      }
+
+      // Attach ATC listener to fallback cards (snippet cards handle their own)
+      const atcBtn = cardEl.querySelector('.pango-fav-card__atc');
+      if (atcBtn) {
+        atcBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          addToCart(atcBtn.dataset.variantId, atcBtn);
+        });
+      }
+
+      grid.appendChild(cardEl);
+      rendered++;
+    });
+
+    if (rendered === 0) {
+      emptyMsg.style.display = 'block';
+    }
+  }
+
+  init();
+})();
 </script>
 
 
 {% schema %}
- {
- "name": "Pango Favorite Products",
- "settings": [],
- "presets": [
-   {
-     "name": "Pango Favorite Products",
-     "category": "All Pango"
-   }
- ]
-} 
+{
+  "name": "Pango Favorite Products",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Pango Favorite Products",
+      "category": "All Pango"
+    }
+  ]
+}
 {% endschema %}
-

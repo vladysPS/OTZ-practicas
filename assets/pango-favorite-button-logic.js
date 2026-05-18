@@ -11,6 +11,7 @@ class FavoriteButton extends HTMLElement {
     super();
 
     this.isFavorite = false;
+    this.heartFull = this.querySelector(".heartFull");
   }
 
   connectedCallback() {

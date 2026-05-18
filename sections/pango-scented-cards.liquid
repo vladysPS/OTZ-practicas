@@ -39,9 +39,9 @@
                                     <div class="texture container" style="width: 20px;">
                                         {{ product.metafields.custom.soundtrack.value.texture |  image_url: width:image.width |  image_tag }}
                                     </div>
-                                    <div class="soundscape-text">
+                                    <div class="soundscape-text alpina-typewriter">
                                         <span>THE SOUND SCAPE</span>
-                                        <h4>{{ product.metafields.custom.soundtrack.value.soundscape_name }}</h4>
+                                        <h4 class="alpina-typewriter">{{ product.metafields.custom.soundtrack.value.soundscape_name }}</h4>
                                     </div>
                                     <div class="play-button">
                                         <audio controls src="{{ product.metafields.custom.soundtrack.value.audio_file | file_url }}"></audio>
@@ -111,13 +111,31 @@
     }
     .soundscape-cards-container{
         .swiper {
-        width: 100%;
-        height: 100%;
+            width: 100%;
+            height: 100%;
         }
         .swiper-slide {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .card-container{
+                border:2px dotted red ;
+                audio{
+                    display: none;
+                }
+                .sound-player-container{
+                    display: flex;
+                    align-items: center;
+                    .soundscape-text{
+                        h4{
+                            margin:0;
+                        }
+                    }
+                    .play-button{
+                        margin-left:auto;
+                    }
+                }
+            }
         }
 
     }
@@ -167,10 +185,11 @@
 <script>
 let swiper = new Swiper(".mySwiperScent", {
     slidesPerView:2.5,
-    spaceBetween:20,
+    spaceBetween:2,
     breakpoints:{
         768: {
-            slidesPerView: 4
+            slidesPerView: 4,
+            spaceBetween:5,
         }   
     }     
 });

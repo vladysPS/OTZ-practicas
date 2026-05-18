@@ -34,9 +34,9 @@
     {{ content_for_header }}
   {%- # --------------- START PANGO -------------- -%}
      {{ 'pango-custom.css' | asset_url | stylesheet_tag }}
-     {%- if template == 'collection' and collection.handle == 'otz-all-products' -%}
+   
      {{ 'pango-favorite-button-logic.js' | asset_url |  script_tag }}
-      {%- endif -%}
+   
      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js"></script>
      <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/ScrollTrigger.min.js"></script>

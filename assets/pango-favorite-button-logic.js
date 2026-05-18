@@ -5,14 +5,22 @@ class FavoriteButton extends HTMLElement {
   constructor() {
     super();
 
-    this.addEventListener('click', this.handleClick);
     this.isFavorite = false;
   }
 
-  handleClick = () => {
-    console.log("you've clicked this button",this.dataset.productHandle);
-  };
+  connectedCallback() {
+    this.addEventListener('click', this.handleClick);
+  }
 
+  disconnectedCallback() {
+    this.removeEventListener('click', this.handleClick);
+  }
+
+  handleClick = () => {
+    this.isFavorite = !this.isFavorite;
+
+    console.log(this.dataset.productHandle, this.isFavorite);
+  };
 }
 
 customElements.define('favorite-button', FavoriteButton);

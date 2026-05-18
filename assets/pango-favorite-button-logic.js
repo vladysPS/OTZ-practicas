@@ -16,18 +16,18 @@ class FavoriteButton extends HTMLElement {
   connectedCallback() {
     this.addEventListener('click', this.handleClick);
 
-  requestAnimationFrame(() => {
-    this.heartFull = this.querySelector('.heart-full');
-    this.heartEmpty = this.querySelector('.heart-empty');
+    requestAnimationFrame(() => {
+      this.heartFull = this.querySelector('.heart-full');
+      this.heartEmpty = this.querySelector('.heart-empty');
 
-    console.log('this is full svg', this.heartFull);
+      console.log('this is full svg', this.heartFull);
 
-    const favorites = this.getFavorites();
+      const favorites = this.getFavorites();
 
-    this.isFavorite = favorites.includes(this.dataset.productHandle);
+      this.isFavorite = favorites.includes(this.dataset.productHandle);
 
-    this.updateUI();
-  });
+      this.updateUI();
+    });
   }
 
   disconnectedCallback() {
@@ -69,6 +69,17 @@ class FavoriteButton extends HTMLElement {
 
     console.log('Updated favorites:', favorites);
   };
+  updateUI() {
+    if (!this.heartFull || !this.heartEmpty) return;
+
+    if (this.isFavorite) {
+      this.heartFull.style.display = 'block';
+      this.heartEmpty.style.display = 'none';
+    } else {
+      this.heartFull.style.display = 'none';
+      this.heartEmpty.style.display = 'block';
+    }
+  }
 
 
 }

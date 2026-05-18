@@ -51,8 +51,6 @@ class FavoriteButton extends HTMLElement {
       );
 
       this.isFavorite = false;
-
-      console.log('Removed from favorites:', productHandle);
     } else {
       // ADD to favorites
       favorites.push(productHandle);

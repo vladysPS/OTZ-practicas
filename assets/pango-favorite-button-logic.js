@@ -72,7 +72,7 @@ class FavoriteButton extends HTMLElement {
     console.log('Updated favorites:', favorites);
   };
   updateUI(isFavorite){
-    if (sFavorite) {
+    if (isFavorite) {
       console.log("show full heart");
     } else {
       console.log("show empty heart");

@@ -1,6 +1,8 @@
 // @ts-nocheck
 console.log('pango-favorite-button-logic.js loaded!');
 
+localStorage.setItem("favoriteProducts", JSON.stringify([]))
+
 class FavoriteButton extends HTMLElement {
   constructor() {
     super();

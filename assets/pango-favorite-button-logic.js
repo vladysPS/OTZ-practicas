@@ -1,7 +1,10 @@
 // @ts-nocheck
 console.log('pango-favorite-button-logic.js loaded!');
 
-localStorage.setItem("favoriteProducts", JSON.stringify([]))
+// Initialize localStorage only once
+if (!localStorage.getItem('favoriteProducts')) {
+  localStorage.setItem('favoriteProducts', JSON.stringify([]));
+}
 
 class FavoriteButton extends HTMLElement {
   constructor() {
@@ -12,6 +15,8 @@ class FavoriteButton extends HTMLElement {
 
   connectedCallback() {
     this.addEventListener('click', this.handleClick);
+
+    const favorites = this.getFavorites();
   }
 
   disconnectedCallback() {
@@ -23,6 +28,10 @@ class FavoriteButton extends HTMLElement {
 
     console.log("we clicked in-->",this.dataset.productHandle, this.isFavorite);
   };
+
+  getFavorites() {
+    return JSON.parse(localStorage.getItem('favoriteProducts')) || [];
+  }
 }
 
 customElements.define('favorite-button', FavoriteButton);

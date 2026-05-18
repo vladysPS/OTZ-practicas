@@ -7,7 +7,11 @@ class FavoriteButton extends HTMLElement {
 
     this.productHandle = this.dataset.productHandle;
   }
+  this.addEventListener('click', this.handleClick);
 
+  handleClick = () => {
+    console.log("you've clicked this button",this.productHandle);
+  };
 }
 
 customElements.define('favorite-button', FavoriteButton);

@@ -25,8 +25,6 @@ class FavoriteButton extends HTMLElement {
       const favorites = this.getFavorites();
 
       this.isFavorite = favorites.includes(this.dataset.productHandle);
-
-      this.updateUI();
     });
   }
 
@@ -69,17 +67,6 @@ class FavoriteButton extends HTMLElement {
 
     console.log('Updated favorites:', favorites);
   };
-  updateUI() {
-    if (!this.heartFull || !this.heartEmpty) return;
-
-    if (this.isFavorite) {
-      this.heartFull.style.display = 'block';
-      this.heartEmpty.style.display = 'none';
-    } else {
-      this.heartFull.style.display = 'none';
-      this.heartEmpty.style.display = 'block';
-    }
-  }
 
 
 }

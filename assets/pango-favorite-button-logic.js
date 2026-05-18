@@ -11,7 +11,8 @@ class FavoriteButton extends HTMLElement {
     super();
 
     this.isFavorite = false;
-    this.heartFull = this.querySelector(".heartFull");
+    this.heartFull = this.querySelector(".heart-full");
+    console.log("this is full heart svg", this.heartFull);
   }
 
   connectedCallback() {

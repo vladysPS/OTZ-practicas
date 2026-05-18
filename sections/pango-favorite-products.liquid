@@ -3,7 +3,7 @@
 
 <section class="p-{{ section.id }}">
  <div class="page-width">
-  here well have our favorite products
+  here well have our favorite products update
  </div> 
 </section>
 
@@ -30,7 +30,13 @@
 
 {%  # JAVASCRIPT  %}
 <script>
-  
+  const STORAGE_KEY = 'likedProducts'; 
+   let favorites = [];
+  try {
+    favorites = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+  } catch (e) {
+    favorites = [];
+  }
 </script>
 
 

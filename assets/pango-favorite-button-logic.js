@@ -27,6 +27,8 @@ class FavoriteButton extends HTMLElement {
 
       this.isFavorite = favorites.includes(this.dataset.productHandle);
       console.log("the product", this.dataset.productHandle, this.isFavorite);
+
+      this.updateUI(this.isFavorite);
     });
   }
 

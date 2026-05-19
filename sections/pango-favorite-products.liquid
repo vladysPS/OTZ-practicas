@@ -92,10 +92,10 @@
   }
 
   favorites.forEach(async (handle) => {
-    const res = await fetch(`/products/${handle}.js`);
-    console.log("this is RES when requesting the api", res );
-    if (!res.ok) return;
-    const product = await res.json();
+    const response = await fetch(`/products/${handle}.js`);
+    console.log("this is RES when requesting the api", response );
+    if (!response.ok) return;
+    const product = await response.json();
     console.log("this is P filtered with .json after await", product);
 
     const price = (product.variants[0].price / 100).toLocaleString('en-US', {

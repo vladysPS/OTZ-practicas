@@ -90,8 +90,7 @@
     emptyMsg.style.display = 'block';
     return;
   }
-
-  favorites.forEach(async (handle) => {
+  await Promise.all( favorites.map(async (handle) => {
     const response = await fetch(`/products/${handle}.js`);
     console.log("this is RES when requesting the api", response );
     if (!response.ok) return;
@@ -119,7 +118,8 @@
     `;
 
     grid.appendChild(card);
-  });
+  }));
+
 })();
 </script>
 

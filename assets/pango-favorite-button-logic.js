@@ -15,13 +15,15 @@ class FavoriteButton extends HTMLElement {
   connectedCallback() {
     this.addEventListener('click', this.handleClick);
 
-    this.heartFull = this.querySelector('.heart-full');
-    this.heartEmpty = this.querySelector('.heart-empty');
+    requestAnimationFrame(() => {
+      this.heartFull = this.querySelector('.heart-full');
+      this.heartEmpty = this.querySelector('.heart-empty');
 
-    const favorites = this.getFavorites();
+      const favorites = this.getFavorites();
 
-    this.isFavorite = favorites.includes(this.dataset.productHandle);
-    this.updateUI(this.isFavorite);
+      this.isFavorite = favorites.includes(this.dataset.productHandle);
+      this.updateUI(this.isFavorite);
+    });
   }
 
   disconnectedCallback() {

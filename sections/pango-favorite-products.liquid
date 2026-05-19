@@ -93,8 +93,10 @@
 
   favorites.forEach(async (handle) => {
     const res = await fetch(`/products/${handle}.js`);
+    console.log("this is RES when requesting the api", res );
     if (!res.ok) return;
     const p = await res.json();
+    console.log("this is P filtered with .json after await", p);
 
     const price = (p.variants[0].price / 100).toLocaleString('en-US', {
       style: 'currency',

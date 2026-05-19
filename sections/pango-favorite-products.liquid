@@ -95,24 +95,24 @@
     const res = await fetch(`/products/${handle}.js`);
     console.log("this is RES when requesting the api", res );
     if (!res.ok) return;
-    const p = await res.json();
-    console.log("this is P filtered with .json after await", p);
+    const product = await res.json();
+    console.log("this is P filtered with .json after await", product);
 
-    const price = (p.variants[0].price / 100).toLocaleString('en-US', {
+    const price = (product.variants[0].price / 100).toLocaleString('en-US', {
       style: 'currency',
       currency: '{{ cart.currency.iso_code }}'
     });
 
     const card = document.createElement('a');
     card.className = 'pango-fav-card';
-    card.href = `/products/${p.handle}`;
+    card.href = `/products/${product.handle}`;
     card.innerHTML = `
-      ${p.images[0]
-        ? `<img src="${p.images[0]}" alt="${p.title}" loading="lazy">`
+      ${product.images[0]
+        ? `<img src="${product.images[0]}" alt="${product.title}" loading="lazy">`
         : `<div style="aspect-ratio:1;background:#f4f4f4;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:13px;">No image</div>`
       }
       <div class="pango-fav-card__body">
-        <p class="pango-fav-card__title">${p.title}</p>
+        <p class="pango-fav-card__title">${product.title}</p>
         <p class="pango-fav-card__price">${price}</p>
         <span class="pango-fav-card__btn">View product</span>
       </div>

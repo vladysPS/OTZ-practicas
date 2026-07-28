@@ -44,7 +44,7 @@
      {{ 'pango-custom.css' | asset_url | stylesheet_tag }}
    
      {{ 'pango-favorite-button-logic.js' | asset_url |  script_tag }}
-     {{ 'events-test.js' | asset_url | script_tag }}
+      <script type="module" src="{{ 'events-test.js' | asset_url }}"></script>
      {{ 'event-listener.js' | asset_url | script_tag }}
 
    

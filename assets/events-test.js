@@ -1,6 +1,13 @@
 console.log("loaded test events");
 
-document.addEventListener('shopify:cart:view', (event) => {
-    console.log('Standard storefront page view event fired!');
-    console.log('Payload:', event.detail); 
-  });
+import { PageViewEvent } from '@theme/standard-events';
+
+document.addEventListener('DOMContentLoaded', () => {
+  document.dispatchEvent(new PageViewEvent({
+    page: {
+      template: 'product',
+      title: document.title,
+      url: window.location.href,
+    },
+  }));
+});

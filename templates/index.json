@@ -9,19 +9,6 @@
  */
 {
   "sections": {
-    "twelve_hero_7tUFpL": {
-      "type": "twelve-hero",
-      "name": "P twelve page hero",
-      "settings": {
-        "ttulo": "ALTA\nCOSMÉTICA",
-        "texto": "<p>Advanced dermatological and botanical science in effective, safe, and skin-friendly formulas.</p>",
-        "texto2cols": "",
-        "ancho_mximo_texto": 100,
-        "link_url": "shopify://pages/otz-about-us",
-        "texto_url": "EXPLORAR LA COLECCIÓN",
-        "video": "shopify://files/videos/MU.01_WEB_ver1_light.mp4"
-      }
-    },
     "hero_itq7xy": {
       "type": "hero",
       "name": "t:names.hero",
@@ -55,6 +42,19 @@
         "reflection_opacity": 75,
         "padding-block-start": 40,
         "padding-block-end": 40
+      }
+    },
+    "twelve_hero_7tUFpL": {
+      "type": "twelve-hero",
+      "name": "P twelve page hero",
+      "settings": {
+        "ttulo": "ALTA\nCOSMÉTICA",
+        "texto": "<p>Advanced dermatological and botanical science in effective, safe, and skin-friendly formulas.</p>",
+        "texto2cols": "",
+        "ancho_mximo_texto": 100,
+        "link_url": "shopify://pages/otz-about-us",
+        "texto_url": "EXPLORAR LA COLECCIÓN",
+        "video": "shopify://files/videos/MU.01_WEB_ver1_light.mp4"
       }
     },
     "pango_otz_scroll_KFq4iw": {
@@ -441,8 +441,8 @@
     }
   },
   "order": [
-    "twelve_hero_7tUFpL",
     "hero_itq7xy",
+    "twelve_hero_7tUFpL",
     "pango_otz_scroll_KFq4iw",
     "pango_banner_atL43A",
     "pango_typewriter_pFBLKd",

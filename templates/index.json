@@ -14,10 +14,10 @@
       "name": "P twelve page hero",
       "settings": {
         "ttulo": "ALTA\nCOSMÉTICA",
-        "texto": "",
+        "texto": "<p>Advanced dermatological and botanical science in effective, safe, and skin-friendly formulas.</p>",
         "texto2cols": "",
         "ancho_mximo_texto": 100,
-        "link_url": "",
+        "link_url": "shopify://pages/otz-about-us",
         "texto_url": "EXPLORAR LA COLECCIÓN",
         "video": "shopify://files/videos/MU.01_WEB_ver1_light.mp4"
       }

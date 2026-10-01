@@ -9,6 +9,19 @@
  */
 {
   "sections": {
+    "twelve_hero_7tUFpL": {
+      "type": "twelve-hero",
+      "name": "P twelve page hero",
+      "settings": {
+        "ttulo": "ALTA\nCOSMÉTICA",
+        "texto": "",
+        "texto2cols": "",
+        "ancho_mximo_texto": 100,
+        "link_url": "",
+        "texto_url": "EXPLORAR LA COLECCIÓN",
+        "video": "shopify://files/videos/MU.01_WEB_ver1_light.mp4"
+      }
+    },
     "hero_itq7xy": {
       "type": "hero",
       "name": "t:names.hero",
@@ -428,6 +441,7 @@
     }
   },
   "order": [
+    "twelve_hero_7tUFpL",
     "hero_itq7xy",
     "pango_otz_scroll_KFq4iw",
     "pango_banner_atL43A",

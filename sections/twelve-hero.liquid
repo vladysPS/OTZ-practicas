@@ -22,7 +22,7 @@
         {%- assign imagen = section.settings.imagen -%}
         {%- assign video = section.settings.video -%}
         {% if video != blank %}
-            {{ video | video_tag: autoplay: true, loop:true, muted: true, playsinline: true, controls: false, preload: 'auto',class: 'video'  }}
+            {{ video | video_tag: autoplay: true, loop:true, muted: true, playsinline: true, controls: false,class: 'video'  }}
         {% else %}
             {{ imagen | image_url: width: imagen.width | image_tag: class: 'img', loading: 'lazy' }}
         {% endif %}

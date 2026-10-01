@@ -1,0 +1,193 @@
+<!-- p-page-hero.liquid -->
+
+<section class="p-page-hero p-container">
+    <div class="text-wrapper">
+        <h2 class="title">{{ section.settings.ttulo |newline_to_br }}</h2>
+        <div 
+            class="richtext"
+            style="max-width: {{ section.settings.ancho_mximo_texto }}%"
+        >
+            {{ section.settings.texto }}
+        </div>
+        {% if section.settings.link_url != blank %}
+            <a 
+                class="coll-link button"
+                href="{{ section.settings.link_url }}"
+            >
+                {{ section.settings.texto_url }}
+            </a>
+        {% endif %}
+    </div>
+    <div class="image-wrapper">
+        {%- assign imagen = section.settings.imagen -%}
+        {%- assign video = section.settings.video -%}
+        {% if video != blank %}
+            {{ video | video_tag: autoplay: true, loop:true, muted: true, playsinline: true, controls: false, preload: 'auto',class: 'video'  }}
+        {% else %}
+            {{ imagen | image_url: width: imagen.width | image_tag: class: 'img', loading: 'lazy' }}
+        {% endif %}
+    </div>
+</section>
+
+<style>
+    .p-page-hero {
+        padding-top: 62px; 
+        .text-wrapper {
+            margin-bottom: 52px;
+            .title {
+                font-size: 40px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 97%; /* 38.8px */
+                margin: 0 0 32px;
+            }
+            .richtext {
+                display: flex;
+                justify-content: space-between;
+                gap: 20px;
+                p {
+                    font-size: 14px;
+                    margin: 0;
+                    line-height: normal;
+                    &:not(:only-of-type) {
+                        width: 45%;
+                    }
+                }
+            }
+            .coll-link {
+                margin-top: 16px;
+                font-size: 14px;
+            }
+        }
+        .image-wrapper {
+            overflow:hidden;
+            .img {
+                aspect-ratio: 109/119;
+                object-fit: cover;
+            }
+            .video{
+               aspect-ratio: 109/119;
+                object-fit: cover;
+                height:100%;
+                width:100%;
+                transform:scale(1.03);
+            }
+        }
+    }
+    @media(min-width: 768px) {
+        .p-page-hero {
+            padding-top: 55px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            .text-wrapper {
+                width: 50%;
+                margin-bottom: 0;
+                .richtext {
+                    p {
+                        &:not(:only-of-type) {
+                            &:last-of-type {
+                                margin-right: 20px;
+                            }
+                        }
+                    }
+                }
+            }
+            .image-wrapper {
+                width: 50%;
+            }
+        }
+    }
+    @media(min-width: 1100px) {
+        .p-page-hero {
+            .text-wrapper {
+                .title {
+                    font-size: clamp(60px, 6vw, 82px);
+                    margin: 0 0 62px;
+                }
+                .richtext p {
+                    font-size: 24px;
+                    line-height: 32px;
+                    &:not(:only-of-type) {
+                        width: 40%;
+                        font-size: 20px;
+                        &:last-of-type {
+                            margin-right: 80px;
+                        }
+                    }
+                }
+                .coll-link {
+                    margin-top: 42px;
+                    font-size: 20px;
+                }
+            }
+            .image-wrapper {
+                .img {
+                    aspect-ratio: 82/85;
+                }
+            }
+        }
+    }
+</style>
+
+
+{% schema %}
+  {
+  "name": "P twelve page hero",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "ttulo",
+      "label": "Título",
+      "default": "ALTA\nCOSMÉTICA"
+    },
+    {
+      "type": "richtext",
+      "id": "texto",
+      "label": "Texto",
+    },
+    {
+      "type": "richtext",
+      "id": "texto2cols",
+      "label": "Texto 2 columnas",
+      "info": "Para mostrar texto en dos columnas realizar salto de línea"
+    },
+    {
+      "type": "range",
+      "id": "ancho_mximo_texto",
+      "label": "ancho máximo texto",
+      "min": 50,
+      "max": 100,
+      "step": 1,
+      "default": 100,
+      "unit": "%"
+    },
+    {
+      "type": "url",
+      "id": "link_url",
+      "label": "Link url"
+    },
+    {
+      "type": "text",
+      "id": "texto_url",
+      "label": "Texto url",
+      "default": "EXPLORAR LA COLECCIÓN"
+    },
+    {
+      "type": "image_picker",
+      "id": "imagen",
+      "label": "Imagen"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Video"
+    }
+  ],
+  "presets": [
+    {
+      "name": "P twelve page hero"
+    }
+  ]
+}  
+{% endschema %}
